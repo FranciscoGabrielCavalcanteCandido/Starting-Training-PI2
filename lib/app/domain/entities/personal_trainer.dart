@@ -4,7 +4,5 @@ class PersonalTreiner {
   DateTime validadeCref;
 
   PersonalTreiner(
-      {required this.id, 
-      required this.cref, 
-      required this.validadeCref});
+      {required this.id, required this.cref, required this.validadeCref});
 }
