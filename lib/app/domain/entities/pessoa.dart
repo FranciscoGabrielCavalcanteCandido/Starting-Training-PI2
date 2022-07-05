@@ -7,6 +7,8 @@ class Pessoa {
   DateTime dataNascimento;
   String status;
   String academia;
+  String senha;
+  String email;
 
   Pessoa(
       {required this.id,
@@ -16,5 +18,7 @@ class Pessoa {
       required this.academia,
       required this.dataNascimento,
       required this.endereco,
-      required this.status});
+      required this.status,
+      required this.senha,
+      required this.email});
 }
