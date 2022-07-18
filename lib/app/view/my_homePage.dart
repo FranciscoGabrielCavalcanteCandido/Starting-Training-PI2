@@ -12,11 +12,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String? CPF;
+  String? senha;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  definirRota(cpf, senha) {
+    if (cpf == "adm" && senha == "adm") {
+      Navigator.popAndPushNamed(context, "/admPage");
+    }
   }
 
   @override
@@ -51,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 20,
                 ),
               ),
+              onChanged: (text) {
+                CPF = text;
+              },
             ),
             SizedBox(
               width: 10,
@@ -66,6 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 20,
                 ),
               ),
+              onChanged: (text) {
+                senha = text;
+              },
             ),
             Container(
               height: 30,
@@ -81,8 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: FlatButton(
                 child: Text("Entrar"),
-                onPressed: () =>
-                    Navigator.popAndPushNamed(context, "/userPage"),
+                onPressed: () => definirRota(CPF, senha),
               ),
             ),
           ],

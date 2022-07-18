@@ -13,6 +13,7 @@ class Aluno extends Pessoa {
       required endereco,
       required status,
       required senha,
+      required permissao,
       required this.frequencia})
       : super(
             id: id,
@@ -23,5 +24,6 @@ class Aluno extends Pessoa {
             dataNascimento: dataNascimento,
             endereco: endereco,
             status: status,
-            senha: senha);
+            senha: senha,
+            permissao: permissao);
 }

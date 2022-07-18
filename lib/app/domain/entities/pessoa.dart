@@ -8,6 +8,7 @@ class Pessoa {
   String status;
   String academia;
   String senha;
+  String permissao;
 
   Pessoa(
       {required this.id,
@@ -18,5 +19,6 @@ class Pessoa {
       required this.dataNascimento,
       required this.endereco,
       required this.status,
-      required this.senha});
+      required this.senha,
+      required this.permissao});
 }

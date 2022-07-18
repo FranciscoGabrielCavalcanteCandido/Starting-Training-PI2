@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class RegistrationUserPage extends StatelessWidget {
+class RegistrationPersonalPage extends StatelessWidget {
   int? id;
   String? nome;
   String? CPF;
@@ -12,13 +12,60 @@ class RegistrationUserPage extends StatelessWidget {
   String? status;
   String? academia;
   String? senha;
+  String? permissao;
+  String? cref;
+  String? validadeCref;
+
+  /*salvar(BuildContext context, int? id, String? nome,String? CPF,String? telefone,) async {
+    var caminho = join(await getDatabasesPath(), 'banco.db');
+    Database banco = await openDatabase(caminho);
+
+    String sql;
+
+    if (id == null) {
+      sql = 'INSERT INTO usuario (nome, descricao) VALUES (?,?)';
+      banco.rawInsert(sql, [nome, descricao]);
+    } else {
+      sql = 'UPDATE usuario SET nome = ?, descricao = ? WHRE id = ?';
+      banco.rawUpdate(sql, [nome, descricao, id]);
+    }
+
+    Navigator.push(context, new MaterialPageRoute(
+        builder:(context)=> MyApp()
+    ),);
+  }
+  
+  
+  cadastrar(int? id, String nome, String descricao) async {
+    var caminho = join(await getDatabasesPath(), 'banco.db');
+    var banco = await openDatabase(caminho);
+
+    String sql;
+
+    if (id == null) {
+      sql = 'INSERT INTO usuario (nome, descricao) VALUES (?,?)';
+      banco.rawInsert(sql, [nome, descricao]);
+    } else {
+      sql = 'UPDATE usuario SET nome = ?, descricao = ? WHRE id = ?';
+      banco.rawUpdate(sql, [nome, descricao, id]);
+    }
+  }
+  
+  Future<int> excluir(int id) async {
+    String caminho = join(await getDatabasesPath(), 'banco.db');
+    Database banco = await openDatabase(caminho, version: 1);
+    String sql = "DELETE FROM usuario WHERE id = ?";
+    Future<int> linhaAfetada;
+    linhaAfetada = banco.rawDelete(sql, [id]);
+    return linhaAfetada;
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text('Cadastro de Usuário'),
+        title: Text('Cadastro de Personal'),
         centerTitle: true,
       ),
       body: Container(
@@ -81,6 +128,30 @@ class RegistrationUserPage extends StatelessWidget {
                 },
                 decoration: InputDecoration(label: Text('Status')),
               ),
+              TextField(
+                onChanged: (text) {
+                  cref = text;
+                },
+                decoration: InputDecoration(label: Text('Cref')),
+              ),
+              TextField(
+                onChanged: (text) {
+                  validadeCref = text;
+                },
+                decoration: InputDecoration(label: Text('Validade Cref')),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 30,
+                  bottom: 20,
+                ),
+                child: ElevatedButton(
+                  child: Text('Salvar Personal'),
+                  onPressed: () {
+                    //salvar(context, null, nome, descricao);
+                  },
+                ),
+              )
             ],
           ),
         ),
