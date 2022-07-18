@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -23,6 +24,69 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(
+          top: 60,
+          left: 40,
+          right: 40,
+        ),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              width: 150,
+              height: 150,
+              child: Image.asset("/logoInicial.png"),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: "CPF",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Senha",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Container(
+              height: 30,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+              ),
+              child: FlatButton(
+                child: Text("Entrar"),
+                onPressed: () =>
+                    Navigator.popAndPushNamed(context, "/userPage"),
+              ),
+            ),
+          ],
+        ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

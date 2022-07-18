@@ -16,7 +16,6 @@ class PersonalTreiner extends Pessoa {
       required endereco,
       required status,
       required senha,
-      required email,
       required this.cref,
       required this.validadeCref})
       : super(
@@ -28,6 +27,5 @@ class PersonalTreiner extends Pessoa {
             dataNascimento: dataNascimento,
             endereco: endereco,
             status: status,
-            email: email,
             senha: senha);
 }
