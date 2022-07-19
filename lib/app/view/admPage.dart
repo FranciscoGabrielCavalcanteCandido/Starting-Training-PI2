@@ -1,9 +1,4 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AdmPage extends StatelessWidget {
   const AdmPage({Key? key}) : super(key: key);
@@ -32,7 +27,7 @@ class AdmPage extends StatelessWidget {
               child: FlatButton(
                 child: Text("Personal"),
                 onPressed: () => Navigator.popAndPushNamed(
-                    context, "/registrationPersonalPage"),
+                    context, "/listPersonalPage"),
               ),
             ),
             Container(

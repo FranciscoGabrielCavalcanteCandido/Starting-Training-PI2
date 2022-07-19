@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -38,7 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               width: 150,
               height: 150,
-              child: Image.asset("/logoInicial.png"),
             ),
             SizedBox(
               height: 20,

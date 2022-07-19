@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starting_training/app/view/admPage.dart';
 import 'package:starting_training/app/view/alunoView/registrationAlunoPage.dart';
 import 'package:starting_training/app/view/my_homePage.dart';
+import 'package:starting_training/app/view/personalView/listPersonalPage.dart';
 import 'package:starting_training/app/view/personalView/registrationPersonalPage.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/admPage': (context) => AdmPage(),
         '/registrationPersonalPage': (context) => RegistrationPersonalPage(),
         '/registrationAlunoPage': (context) => RegistrationAlunoPage(),
+        '/listPersonalPage': (context) => ListPersonalPage(),
       },
     );
   }
