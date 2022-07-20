@@ -18,13 +18,9 @@ class _MyHomePageState extends State<MyHomePage> {
   definirRota(cpf, senha) {
     if (cpf == "000" && senha == "adm") {
       Navigator.popAndPushNamed(context, "/admPage");
-    }
-    else if(permissao == 'personal'){
-
-    }
-    else if(permissao == 'aluno'){
-      
-    }
+    } else if (cpf == "123" && senha == "personal") {
+      Navigator.popAndPushNamed(context, "/personalPage");
+    } else if (permissao == 'aluno') {}
   }
 
   @override
