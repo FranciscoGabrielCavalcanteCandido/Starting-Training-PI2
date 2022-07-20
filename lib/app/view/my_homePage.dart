@@ -15,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? senha;
 
   definirRota(cpf, senha) {
-    if (cpf == "adm" && senha == "adm") {
+    if (cpf == "000" && senha == "adm") {
       Navigator.popAndPushNamed(context, "/admPage");
     }
   }
