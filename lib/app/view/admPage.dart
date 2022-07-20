@@ -26,8 +26,8 @@ class AdmPage extends StatelessWidget {
               ),
               child: FlatButton(
                 child: Text("Personal"),
-                onPressed: () => Navigator.popAndPushNamed(
-                    context, "/listPersonalPage"),
+                onPressed: () =>
+                    Navigator.popAndPushNamed(context, "/listPersonalPage"),
               ),
             ),
             Container(
@@ -43,6 +43,21 @@ class AdmPage extends StatelessWidget {
                 child: Text("Aluno"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/registrationAlunoPage"),
+              ),
+            ),
+            Container(
+              height: 30,
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+              ),
+              child: FlatButton(
+                child: Text("Treino"),
+                onPressed: () =>
+                    Navigator.popAndPushNamed(context, "/tareaList"),
               ),
             ),
           ],

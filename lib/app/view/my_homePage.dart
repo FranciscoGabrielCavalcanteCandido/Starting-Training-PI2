@@ -13,10 +13,17 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String? CPF;
   String? senha;
+  String? permissao;
 
   definirRota(cpf, senha) {
-    if (cpf == "adm" && senha == "adm") {
+    if (cpf == "000" && senha == "adm") {
       Navigator.popAndPushNamed(context, "/admPage");
+    }
+    else if(permissao == 'personal'){
+
+    }
+    else if(permissao == 'aluno'){
+      
     }
   }
 
