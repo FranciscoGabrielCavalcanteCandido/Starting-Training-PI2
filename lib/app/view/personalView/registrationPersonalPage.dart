@@ -18,26 +18,26 @@ class RegistrationPersonalPage extends StatelessWidget {
   String? cref;
   String? validadeCref;
 
-  salvar(
-    BuildContext context,
-    int? id,
-    String? nome,
-    String? CPF,
-    String? telefone,
-  ) async {
+  Future<int> salvar() async {
     Database banco = await Conexao.get();
+    Future<int> linhasAfetadas;
 
-    String sql;
-
-    if (id == null) {
-      sql = 'INSERT INTO personal (nome, descricao) VALUES (?,?)';
-      banco.rawInsert(sql, [nome, CPF, telefone]);
-    } else {
-      sql = 'UPDATE personal SET nome = ?, descricao = ? WHRE id = ?';
-      banco.rawUpdate(sql, [nome, CPF, telefone]);
-    }
+     linhasAfetadas = banco.rawInsert(Conexao.inserirPersonal, [
+      nome,
+      CPF,
+      telefone,
+      endereco,
+      dataNascimento,
+      status,
+      academia,
+      senha,
+      permissao,
+      cref,
+      validadeCref
+    ]); 
+    
+    return linhasAfetadas;
   }
-
 
   Future<int> excluir(int id) async {
     Database banco = await Conexao.get();

@@ -6,6 +6,7 @@ class PersonalTreiner extends Pessoa {
   String cref;
   DateTime validadeCref;
 
+
   PersonalTreiner(
       {required id,
       required nome,
@@ -17,8 +18,10 @@ class PersonalTreiner extends Pessoa {
       required status,
       required senha,
       required permissao,
+      required idAlunos,
       required this.cref,
-      required this.validadeCref})
+      required this.validadeCref,
+      })
       : super(
             id: id,
             nome: nome,

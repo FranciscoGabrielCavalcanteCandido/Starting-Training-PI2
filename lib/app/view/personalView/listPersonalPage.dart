@@ -3,25 +3,29 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:starting_training/app/model/sqlite/conecaoSqlite.dart';
 
-class ListPersonalPage extends StatelessWidget {
-  int? id;
-  String? nome;
-  String? CPF;
-  String? telefone;
-  String? endereco;
-  String? dataNascimento;
-  String? status;
-  String? academia;
-  String? senha;
+class ListPersonalPage extends StatefulWidget {
+  @override
+  State<ListPersonalPage> createState() => _ListPersonalPageState();
+}
 
+class _ListPersonalPageState extends State<ListPersonalPage> {
+  //FUNÇÃO QUE BUSCA OS DADOS DO PERSONAL
   Future<List<Map<String, Object?>>> buscaDadosPersonal() async {
     String caminhoBD = join(await getDatabasesPath(), 'banco.db');
-    //deleteDatabase(caminhoBD);
     Database banco = await Conexao.get();
 
     List<Map<String, Object?>> personal =
         await banco.rawQuery('SELECT * FROM personal');
     return personal;
+  }
+
+  Future<int> excluir(int id) async {
+    String caminhoBD = join(await getDatabasesPath(), 'banco.db');
+    Database banco = await Conexao.get();
+    int linhasExcluidas =
+        await banco.rawDelete('DELETE FROM personal WHERE id = ?', [id]);
+    setState(() {});
+    return linhasExcluidas;
   }
 
   @override
@@ -51,8 +55,24 @@ class ListPersonalPage extends StatelessWidget {
             itemBuilder: (context, index) {
               var personals = personal[index];
 
-              return Card(
-                elevation: 4,
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Card(
+                        child: Container(
+                          padding: EdgeInsets.all(20.0),
+                          child: Column(
+                            children: <Widget>[
+                              Text(personals["nome"].toString())
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               );
             },
           );
