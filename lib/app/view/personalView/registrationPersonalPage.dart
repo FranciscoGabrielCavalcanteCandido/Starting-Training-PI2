@@ -18,11 +18,12 @@ class RegistrationPersonalPage extends StatelessWidget {
   String? cref;
   String? validadeCref;
 
-  Future<int> salvar() async {
+  Future<int> salvar(context, String nome, String CPF, String telefone,
+      [int? id]) async {
     Database banco = await Conexao.get();
     Future<int> linhasAfetadas;
 
-     linhasAfetadas = banco.rawInsert(Conexao.inserirPersonal, [
+    linhasAfetadas = banco.rawInsert(Conexao.inserirPersonal, [
       nome,
       CPF,
       telefone,
@@ -34,8 +35,8 @@ class RegistrationPersonalPage extends StatelessWidget {
       permissao,
       cref,
       validadeCref
-    ]); 
-    
+    ]);
+
     return linhasAfetadas;
   }
 
@@ -135,7 +136,7 @@ class RegistrationPersonalPage extends StatelessWidget {
                 child: ElevatedButton(
                   child: Text('Salvar Personal'),
                   onPressed: () {
-                    salvar(context, null, nome, CPF, telefone);
+                    salvar(context, nome!, CPF!, telefone!, null);
                   },
                 ),
               )
