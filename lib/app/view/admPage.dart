@@ -7,7 +7,7 @@ class AdmPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 47, 47, 47),
         title: Text("Pagina Admnistrador"),
       ),
       body: Container(
@@ -23,6 +23,7 @@ class AdmPage extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 color: Colors.amber,
+                borderRadius: BorderRadius.circular(50.0),
               ),
               child: FlatButton(
                 child: Text("Personal"),
@@ -38,6 +39,7 @@ class AdmPage extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 color: Colors.amber,
+                borderRadius: BorderRadius.circular(50.0),
               ),
               child: FlatButton(
                 child: Text("Aluno"),
@@ -53,6 +55,7 @@ class AdmPage extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 color: Colors.amber,
+                borderRadius: BorderRadius.circular(50.0),
               ),
               child: FlatButton(
                 child: Text("Treino"),

@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Color.fromARGB(255, 47, 47, 47),
       ),
       body: Container(
         padding: EdgeInsets.only(
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 40,
               decoration: BoxDecoration(
                 color: Colors.amber,
+                borderRadius: BorderRadius.circular(50.0),
               ),
               child: FlatButton(
                 child: Text("Entrar"),

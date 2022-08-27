@@ -7,7 +7,7 @@ class AlunoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 47, 47, 47),
         title: Text("Pagina Aluno"),
       ),
       body: Container(

@@ -40,7 +40,10 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
           IconButton(
             icon: Icon(Icons.person_add),
             onPressed: () =>
-                Navigator.pushNamed(context, '/registrationPersonalPage'),
+                Navigator.pushNamed(context, '/registrationPersonalPage')
+                    .then((value) {
+              setState(() {});
+            }),
           ),
         ],
       ),
