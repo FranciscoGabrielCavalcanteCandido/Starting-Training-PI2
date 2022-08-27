@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => MyHomePage(title: "StratTraining"),
+        '/': (context) => MyHomePage(title: "Start Training"),
         '/admPage': (context) => AdmPage(),
         '/registrationPersonalPage': (context) => RegistrationPersonalPage(),
         '/registrationAlunoPage': (context) => RegistrationAlunoPage(),

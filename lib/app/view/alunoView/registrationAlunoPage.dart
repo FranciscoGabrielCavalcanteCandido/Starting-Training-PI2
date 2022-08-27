@@ -55,13 +55,15 @@ class RegistrationAlunoPage extends StatelessWidget {
     Future<int> linhaAfetada;
     linhaAfetada = banco.rawDelete(sql, [id]);
     return linhaAfetada;
+
+    navigator.pop
   }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.amber,
+          backgroundColor: Color.fromARGB(255, 47, 47, 47),
           title: Text('Cadastro de Aluno'),
           centerTitle: true,
         ),

@@ -17,6 +17,29 @@ class Conexao {
       )''';
   static String criarAluno = 'CREATE TABLE treino ()';
 
+  static String criarExercicio = '''
+        CREAT TABLE exercicio(
+          id INTEGER PRIMERY KEY,
+          nome TEXT NOT NULL,
+          peso TEXT NOT NULL,
+          serie TEXT NOT NULL,
+          categoria TEXT NOT NULL,
+          tipo_exercicio TEXT NOT NULL,
+          repeticao TEXT NOT NULL
+      )''';
+
+  static String criarMedida = '''
+        CREATE TABLE medida(
+          id INTEGER PRIMERY KEY,
+          altura DOUBLE NOT NULL,
+          pesoKg DOUBLE NOT NULL,
+          cintura DOUBLE NOT NULL,
+          braco DOUBLE NOT NULL,
+          quadril DOUBLE NOT NULL,
+          perna DOUBLE NOT NULL,
+          dataAvaliacao DATE NOT NULL
+        )''';
+
   static Future<Database> get() async {
     if (_database == null) {
       var path = join(await getDatabasesPath(), 'banco_local');
@@ -28,6 +51,7 @@ class Conexao {
           banco.execute(criarTreino);
           banco.execute(criarPersonal);
           banco.execute(criarAluno);
+          banco.execute(criarExercicio);
         },
       );
     }
