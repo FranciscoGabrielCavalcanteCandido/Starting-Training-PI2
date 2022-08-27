@@ -20,5 +20,5 @@ class Pessoa {
       required this.endereco,
       required this.status,
       required this.senha,
-      required this.permissao});
+      required this.permissao, idAlunos});
 }

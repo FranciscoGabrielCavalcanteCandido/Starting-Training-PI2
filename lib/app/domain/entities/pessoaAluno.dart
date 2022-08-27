@@ -2,6 +2,8 @@ import 'package:starting_training/app/domain/entities/pessoa.dart';
 
 class Aluno extends Pessoa {
   int frequencia;
+  int idMedidas;
+  int idPersonal;
 
   Aluno(
       {required id,
@@ -14,7 +16,9 @@ class Aluno extends Pessoa {
       required status,
       required senha,
       required permissao,
-      required this.frequencia})
+      required this.frequencia,
+      required this.idMedidas,
+      required this.idPersonal})
       : super(
             id: id,
             nome: nome,

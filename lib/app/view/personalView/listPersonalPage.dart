@@ -9,14 +9,26 @@ class ListPersonalPage extends StatefulWidget {
 }
 
 class _ListPersonalPageState extends State<ListPersonalPage> {
+<<<<<<< HEAD
+=======
+  //FUNÇÃO QUE BUSCA OS DADOS DO PERSONAL
+>>>>>>> c9c24a4b9a33b4080f7beced3fa5d74c6839cc30
   Future<List<Map<String, Object?>>> buscaDadosPersonal() async {
     String caminhoBD = join(await getDatabasesPath(), 'banco.db');
-    //deleteDatabase(caminhoBD);
     Database banco = await Conexao.get();
 
     List<Map<String, Object?>> personal =
         await banco.rawQuery('SELECT * FROM personal');
     return personal;
+  }
+
+  Future<int> excluir(int id) async {
+    String caminhoBD = join(await getDatabasesPath(), 'banco.db');
+    Database banco = await Conexao.get();
+    int linhasExcluidas =
+        await banco.rawDelete('DELETE FROM personal WHERE id = ?', [id]);
+    setState(() {});
+    return linhasExcluidas;
   }
 
   @override
@@ -49,8 +61,24 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
             itemBuilder: (context, index) {
               var personals = personal[index];
 
-              return Card(
-                elevation: 4,
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Card(
+                        child: Container(
+                          padding: EdgeInsets.all(20.0),
+                          child: Column(
+                            children: <Widget>[
+                              Text(personals["nome"].toString())
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               );
             },
           );
