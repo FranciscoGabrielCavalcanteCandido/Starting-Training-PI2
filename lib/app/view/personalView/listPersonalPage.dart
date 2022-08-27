@@ -9,10 +9,7 @@ class ListPersonalPage extends StatefulWidget {
 }
 
 class _ListPersonalPageState extends State<ListPersonalPage> {
-<<<<<<< HEAD
-=======
   //FUNÇÃO QUE BUSCA OS DADOS DO PERSONAL
->>>>>>> c9c24a4b9a33b4080f7beced3fa5d74c6839cc30
   Future<List<Map<String, Object?>>> buscaDadosPersonal() async {
     String caminhoBD = join(await getDatabasesPath(), 'banco.db');
     Database banco = await Conexao.get();

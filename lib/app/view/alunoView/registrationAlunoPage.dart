@@ -64,8 +64,7 @@ class RegistrationAlunoPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 47, 47, 47),
-          title: Text('Cadastro de Aluno'),
-          centerTitle: true,
+          title: Text("Cadastro de Aluno"),
         ),
         body: Container(
           padding: EdgeInsets.only(
