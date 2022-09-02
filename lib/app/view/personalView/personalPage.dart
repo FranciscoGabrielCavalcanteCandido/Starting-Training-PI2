@@ -24,7 +24,7 @@ class PersonalPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.amber,
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Alunos"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/listAlunoPage"),
@@ -39,7 +39,7 @@ class PersonalPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.amber,
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Treinos"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/registrationTreinoPage"),
@@ -51,7 +51,7 @@ class PersonalPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.amber,
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Relatórios"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/generationRelatorioPage"),

@@ -24,7 +24,7 @@ class AlunoPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.amber,
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Treinos"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/listadeTreinosPage"),
@@ -39,7 +39,7 @@ class AlunoPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.amber,
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Relatórios"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/relatoriosPage"),

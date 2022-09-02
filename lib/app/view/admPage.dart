@@ -25,7 +25,7 @@ class AdmPage extends StatelessWidget {
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(50.0),
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Personal"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/listPersonalPage"),
@@ -41,7 +41,7 @@ class AdmPage extends StatelessWidget {
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(50.0),
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Aluno"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/registrationAlunoPage"),
@@ -57,7 +57,7 @@ class AdmPage extends StatelessWidget {
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(50.0),
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Treino"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/tareaList"),

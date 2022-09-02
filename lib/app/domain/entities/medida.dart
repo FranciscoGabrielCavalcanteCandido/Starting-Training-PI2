@@ -1,15 +1,18 @@
 import 'dart:html';
 
+import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+
 class Medida {
-  int id;
-  double altura;
-  double peso;
-  double cintura;
-  double braco;
-  double quadril;
-  double perna;
-  late double imc;
+  final dynamic id;
+  final double altura;
+  final double peso;
+  final double cintura;
+  final double braco;
+  final double quadril;
+  final double perna;
   DateTime dataAvaliacao;
+  double imc;
+  Aluno aluno;
 
   Medida(
       {required this.id,
@@ -19,5 +22,7 @@ class Medida {
       required this.braco,
       required this.quadril,
       required this.perna,
-      required this.dataAvaliacao});
+      required this.dataAvaliacao,
+      required this.imc,
+      required this.aluno});
 }

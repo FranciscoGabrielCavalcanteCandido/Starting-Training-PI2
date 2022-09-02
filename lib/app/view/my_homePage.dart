@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(50.0),
               ),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Text("Entrar"),
                 onPressed: () => definirRota(CPF, senha),
               ),

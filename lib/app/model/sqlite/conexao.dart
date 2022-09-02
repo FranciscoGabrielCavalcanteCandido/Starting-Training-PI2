@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:starting_training/app/model/sqlite/conexao.dart';
+import 'package:starting_training/app/model/sqlite/script.dart';
 
 class Conexao {
   static Database? _conexao;
