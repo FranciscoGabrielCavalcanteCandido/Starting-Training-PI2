@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:starting_training/app/model/sqlite/conecaoSqlite.dart';
+import 'package:starting_training/app/model/sqlite/conexao.dart';
 
 class RegistrationPersonalPage extends StatelessWidget {
   int? id;
@@ -17,36 +17,6 @@ class RegistrationPersonalPage extends StatelessWidget {
   String permissao = 'personal';
   String? cref;
   String? validadeCref;
-
-  Future<int> salvar(context, String nome, String CPF, String telefone,
-      [int? id]) async {
-    Database banco = await Conexao.get();
-    Future<int> linhasAfetadas;
-
-    linhasAfetadas = banco.rawInsert(Conexao.inserirPersonal, [
-      nome,
-      CPF,
-      telefone,
-      endereco,
-      dataNascimento,
-      status,
-      academia,
-      senha,
-      permissao,
-      cref,
-      validadeCref
-    ]);
-
-    return linhasAfetadas;
-  }
-
-  Future<int> excluir(int id) async {
-    Database banco = await Conexao.get();
-    String sql = "DELETE FROM usuario WHERE id = ?";
-    Future<int> linhaAfetada;
-    linhaAfetada = banco.rawDelete(sql, [id]);
-    return linhaAfetada;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +106,7 @@ class RegistrationPersonalPage extends StatelessWidget {
                 child: ElevatedButton(
                   child: Text('Salvar Personal'),
                   onPressed: () {
-                    salvar(context, nome!, CPF!, telefone!, null);
+                    ///salvar(context, nome!, CPF!, telefone!, null);
                   },
                 ),
               )

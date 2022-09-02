@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:starting_training/app/model/sqlite/conecaoSqlite.dart';
+import 'package:starting_training/app/model/sqlite/conexao.dart';
 
 class TarefaLista extends StatelessWidget {
   const TarefaLista({Key? key}) : super(key: key);
 
   Future<List<Map<String, Object?>>> consultar() async {
-    Database database = await Conexao.get();
+    Database db = await Conexao.getConexao();
 
     List<Map<String, Object?>> list =
-        await database.rawQuery('SELECT * FROM treino');
+        await db.rawQuery('SELECT * FROM treino');
     return list;
   }
 

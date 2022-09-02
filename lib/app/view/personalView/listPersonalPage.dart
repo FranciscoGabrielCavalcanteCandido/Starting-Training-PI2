@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:starting_training/app/model/sqlite/conecaoSqlite.dart';
+import 'package:starting_training/app/model/sqlite/conexao.dart';
+
 
 class ListPersonalPage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
   //FUNÇÃO QUE BUSCA OS DADOS DO PERSONAL
   Future<List<Map<String, Object?>>> buscaDadosPersonal() async {
     String caminhoBD = join(await getDatabasesPath(), 'banco.db');
-    Database banco = await Conexao.get();
+    Database banco = await Conexao.getConexao();
 
     List<Map<String, Object?>> personal =
         await banco.rawQuery('SELECT * FROM personal');
@@ -21,7 +22,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
 
   Future<int> excluir(int id) async {
     String caminhoBD = join(await getDatabasesPath(), 'banco.db');
-    Database banco = await Conexao.get();
+    Database banco = await Conexao.getConexao();
     int linhasExcluidas =
         await banco.rawDelete('DELETE FROM personal WHERE id = ?', [id]);
     setState(() {});
