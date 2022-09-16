@@ -6,7 +6,7 @@ final criar_banco = [
           nome TEXT NOT NULL
       )''',
   '''
-        CREAT TABLE personal(
+        CREATE TABLE personal(
           id INTEGER PRIMERY KEY,
           nome TEXT NOT NULL,
           cpf TEXT NOT NULL,
@@ -17,10 +17,10 @@ final criar_banco = [
           senha TEXT NOT NULL,
           permissao TEXT NOT NULL,
           cref TEXT NOT NULL,
-          validadeCref TEXT NOT NULL
+          validadeCref DATE NOT NULL
       )''',
   '''
-        CREAT TABLE aluno(
+        CREATE TABLE aluno(
           id INTEGER PRIMERY KEY,
           nome TEXT NOT NULL,
           cpf TEXT NOT NULL,
@@ -31,11 +31,9 @@ final criar_banco = [
           senha TEXT NOT NULL,
           permissao TEXT NOT NULL,
           frequencia INT,
-          personal_id int NOT NULL,
-          FOREIGN KEY (personal_id) REFERENCES personal(id)
       )''',
   '''
-        CREAT TABLE exercicio(
+        CREATE TABLE exercicio(
           id INTEGER PRIMERY KEY,
           nome TEXT NOT NULL,
           peso TEXT NOT NULL,

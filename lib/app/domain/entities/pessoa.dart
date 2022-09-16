@@ -4,7 +4,7 @@ class Pessoa {
   final String CPF;
   final String telefone;
   final String endereco;
-  final DateTime dataNascimento;
+  final String dataNascimento;
   final String status;
   final String senha;
   final String permissao;

@@ -11,8 +11,8 @@ class AlunoDAO {
     Database db = await Conexao.getConexao();
     const sql =
         '''INSERT INTO aluno (nome, cpf, telefone, dataNascimento, endereco,
-         status, senha, permissao, frequencia, personal_id) 
-        VALUES (?,?,?,?,?,?,?,?,?,?)''';
+         status, senha, permissao, frequencia) 
+        VALUES (?,?,?,?,?,?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(sql, [
       aluno.nome,
       aluno.CPF,
@@ -23,7 +23,6 @@ class AlunoDAO {
       aluno.senha,
       aluno.permissao,
       aluno.frequencia,
-      aluno.personal.id,
     ]);
     return linhasAfetadas > 0;
   }
@@ -69,17 +68,17 @@ class AlunoDAO {
       Map<String, Object?> resultado = (await db.rawQuery(sql, [id])).first;
       if (resultado.isEmpty) throw Exception('Sem registros com este id');
       Aluno aluno = Aluno(
-          id: resultado['id'] as int,
-          nome: resultado['nome'].toString(),
-          CPF: resultado['cpf'].toString(),
-          telefone: resultado['telefone'].toString(),
-          dataNascimento: resultado['dataNascimento'].toString(),
-          endereco: resultado['endereco'].toString(),
-          status: resultado['status'].toString(),
-          frequencia: resultado['frequencia'] as int,
-          permissao: resultado['permissao'].toString(),
-          senha: resultado['senha'].toString(),
-          personal: resultado['personal_id'] as PersonalTreiner);
+        id: resultado['id'] as int,
+        nome: resultado['nome'].toString(),
+        CPF: resultado['cpf'].toString(),
+        telefone: resultado['telefone'].toString(),
+        dataNascimento: resultado['dataNascimento'].toString(),
+        endereco: resultado['endereco'].toString(),
+        status: resultado['status'].toString(),
+        frequencia: resultado['frequencia'] as int,
+        permissao: resultado['permissao'].toString(),
+        senha: resultado['senha'].toString(),
+      );
       return aluno;
     } catch (e) {
       throw Exception('classe AlunoDAO, método consultar');
@@ -98,17 +97,17 @@ class AlunoDAO {
       if (resultados.isEmpty) throw Exception('Sem registros');
       List<Aluno> alunos = resultados.map((resultado) {
         return Aluno(
-            id: resultado['id'] as int,
-            nome: resultado['nome'].toString(),
-            CPF: resultado['cpf'].toString(),
-            telefone: resultado['telefone'].toString(),
-            dataNascimento: resultado['dataNascimento'].toString(),
-            endereco: resultado['endereco'].toString(),
-            status: resultado['status'].toString(),
-            frequencia: resultado['frequencia'] as int,
-            permissao: resultado['permissao'].toString(),
-            senha: resultado['senha'].toString(),
-            personal: resultado['personal_id'] as PersonalTreiner);
+          id: resultado['id'] as int,
+          nome: resultado['nome'].toString(),
+          CPF: resultado['cpf'].toString(),
+          telefone: resultado['telefone'].toString(),
+          dataNascimento: resultado['dataNascimento'].toString(),
+          endereco: resultado['endereco'].toString(),
+          status: resultado['status'].toString(),
+          frequencia: resultado['frequencia'] as int,
+          permissao: resultado['permissao'].toString(),
+          senha: resultado['senha'].toString(),
+        );
       }).toList();
       return alunos;
     } catch (e) {
