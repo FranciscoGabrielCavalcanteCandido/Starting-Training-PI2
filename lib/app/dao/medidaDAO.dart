@@ -56,7 +56,7 @@ class MedidaDAO {
     } catch (e) {
       throw Exception('classe MedidaDAOSQLite, método excluir');
     } finally {
-      db.close();
+      
     }
   }
 
@@ -82,7 +82,7 @@ class MedidaDAO {
     } catch (e) {
       throw Exception('classe MedidaDAO, método consultar');
     } finally {
-      db.close();
+     
     }
   }
 
@@ -111,7 +111,7 @@ class MedidaDAO {
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método listar');
     } finally {
-      db.close();
+      
     }
   }
 }

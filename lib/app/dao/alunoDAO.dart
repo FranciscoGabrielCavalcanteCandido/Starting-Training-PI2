@@ -1,13 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
-import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
-
 import '../model/sqlite/conexao.dart';
 
 class AlunoDAO {
-  Future<bool> salvarAluno(
-    Aluno aluno,
-  ) async {
+  
+  Future<bool> salvarAluno(Aluno aluno) async {
     Database db = await Conexao.getConexao();
     const sql =
         '''INSERT INTO aluno (nome, cpf, telefone, dataNascimento, endereco,
@@ -54,9 +51,8 @@ class AlunoDAO {
       int linhasAfetadas = await db.rawDelete(sql, [id]);
       return linhasAfetadas > 0;
     } catch (e) {
-      throw Exception('classe AlunoDAOSQLite, método excluir');
+      throw Exception(e);
     } finally {
-      db.close();
     }
   }
 
@@ -83,7 +79,6 @@ class AlunoDAO {
     } catch (e) {
       throw Exception('classe AlunoDAO, método consultar');
     } finally {
-      db.close();
     }
   }
 
@@ -111,9 +106,8 @@ class AlunoDAO {
       }).toList();
       return alunos;
     } catch (e) {
-      throw Exception('classe AlunoDAOSQLite, método listar');
+      throw Exception(e);
     } finally {
-      db.close();
     }
   }
 }

@@ -33,7 +33,7 @@ class TreinoDAO {
     } catch (e) {
       throw Exception('classe TreinoDAOSQLite, método excluir');
     } finally {
-      db.close();
+      
     }
   }
 
@@ -53,7 +53,7 @@ class TreinoDAO {
     } catch (e) {
       throw Exception('classe TreinoDAO, método consultar');
     } finally {
-      db.close();
+      
     } 
   }
 
@@ -76,7 +76,7 @@ class TreinoDAO {
     } catch (e) {
       throw Exception('classe TreinoDAOSQLite, método listar');
     } finally {
-      db.close();
+      
     }
   }
 }

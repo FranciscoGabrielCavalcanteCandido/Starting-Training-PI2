@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   sqflite:
   path:
+  sqflite_common_ffi:
 
 dev_dependencies:
   flutter_test:
@@ -46,10 +47,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
-  sqflite: 
-  path: 
-  sqflite_common_ffi:
+  flutter_lints: ^1.0.2
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

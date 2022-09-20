@@ -1,4 +1,4 @@
-final criar_banco = [
+final criarBanco = [
   '''CREATE TABLE treino (
           id INTEGER PRIMERY KEY,
           ordem INT NOT NULL,
@@ -17,8 +17,11 @@ final criar_banco = [
           senha TEXT NOT NULL,
           permissao TEXT NOT NULL,
           cref TEXT NOT NULL,
-          validadeCref DATE NOT NULL
+          validadeCref INT NOT NULL
       )''',
+  '''INSERT INTO personal (id,nome, cpf, telefone, dataNascimento, endereco,
+         status, senha, permissao, cref, validadeCref) 
+        VALUES (1,"chico","111","44","20/07","rua 1","ativo","123","persoal","123","07/2028")''',
   '''
         CREATE TABLE aluno(
           id INTEGER PRIMERY KEY,
@@ -30,7 +33,7 @@ final criar_banco = [
           status TEXT NOT NULL,
           senha TEXT NOT NULL,
           permissao TEXT NOT NULL,
-          frequencia INT,
+          frequencia INT
       )''',
   '''
         CREATE TABLE exercicio(
@@ -58,4 +61,7 @@ final criar_banco = [
           aluno_id INTEGER NOT NULL,
           FOREIGN KEY (aluno_id) REFERENCES aluno(id)
         )''',
+  '''INSERT INTO aluno (id, nome, cpf, telefone, dataNascimento, endereco,
+         status, senha, permissao, frequencia) 
+        VALUES (1,"edu","120","2020","2007","rua1","a","123","aluno",3)'''
 ];

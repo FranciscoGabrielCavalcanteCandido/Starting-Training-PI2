@@ -14,9 +14,7 @@ void main() async {
     db = await Conexao.getConexao();
   });
 
-  tearDownAll(() {
-    db.close();
-  });
+ 
 
   group("Testando classe conexão", () {
     test("testeando conexão aberta", () {

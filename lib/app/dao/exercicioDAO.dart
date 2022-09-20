@@ -50,7 +50,6 @@ class ExercicioDAO {
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método excluir');
     } finally {
-      db.close();
     }
   }
 
@@ -74,7 +73,6 @@ class ExercicioDAO {
     } catch (e) {
       throw Exception('classe ExercicioDAO, método consultar');
     } finally {
-      db.close();
     }
   }
 
@@ -101,7 +99,6 @@ class ExercicioDAO {
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método listar');
     } finally {
-      db.close();
     }
   }
 }

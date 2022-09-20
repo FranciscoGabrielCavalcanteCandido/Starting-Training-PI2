@@ -10,7 +10,7 @@ class PersonalDAO {
   ) async {
     Database db = await Conexao.getConexao();
     const sql =
-        '''INSERT INTO aluno (nome, cpf, telefone, dataNascimento, endereco,
+        '''INSERT INTO personal (nome, cpf, telefone, dataNascimento, endereco,
          status, senha, permissao, cref, validadeCref) 
         VALUES (?,?,?,?,?,?,?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(sql, [
@@ -57,7 +57,7 @@ class PersonalDAO {
     } catch (e) {
       throw Exception('classe PersonalDAOSQLite, método excluir');
     } finally {
-      db.close();
+     
     }
   }
 
@@ -79,12 +79,12 @@ class PersonalDAO {
           cref: resultado['cref'].toString(),
           permissao: resultado['permissao'].toString(),
           senha: resultado['senha'].toString(),
-          validadeCref: resultado['validadeCref'] as DateTime);
+          validadeCref: resultado['validadeCref'].toString());
       return personalTreiner;
     } catch (e) {
       throw Exception('classe PersonalDAO, método consultar');
     } finally {
-      db.close();
+      
     }
   }
 
@@ -108,13 +108,12 @@ class PersonalDAO {
             cref: resultado['cref'].toString(),
             permissao: resultado['permissao'].toString(),
             senha: resultado['senha'].toString(),
-            validadeCref: resultado['validadeCref'] as DateTime);
+            validadeCref: resultado['validadeCref'].toString());
       }).toList();
       return personal;
     } catch (e) {
       throw Exception('classe AlunoDAOSQLite, método listar');
     } finally {
-      db.close();
     }
   }
 }
