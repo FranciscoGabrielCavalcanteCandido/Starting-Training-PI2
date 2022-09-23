@@ -91,6 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.amber, shape: const StadiumBorder()),
                 child: Text("Entrar"),
                 onPressed: () => definirRota(CPF, senha),
               ),

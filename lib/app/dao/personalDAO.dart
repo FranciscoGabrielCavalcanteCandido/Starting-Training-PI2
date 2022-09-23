@@ -1,13 +1,10 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
-import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
+import 'package:sqflite/sqlite_api.dart';
 
+import '../domain/entities/pessoaPersonal_trainer.dart';
 import '../model/sqlite/conexao.dart';
 
 class PersonalDAO {
-  Future<bool> salvarPersonal(
-    PersonalTreiner personalTreiner,
-  ) async {
+  Future<bool> salvarPersonal(PersonalTreiner personalTreiner) async {
     Database db = await Conexao.getConexao();
     const sql =
         '''INSERT INTO personal (nome, cpf, telefone, dataNascimento, endereco,
@@ -56,9 +53,7 @@ class PersonalDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe PersonalDAOSQLite, método excluir');
-    } finally {
-     
-    }
+    } finally {}
   }
 
   Future<PersonalTreiner> consultarPersonal(int id) async {
@@ -83,9 +78,7 @@ class PersonalDAO {
       return personalTreiner;
     } catch (e) {
       throw Exception('classe PersonalDAO, método consultar');
-    } finally {
-      
-    }
+    } finally {}
   }
 
   @override
@@ -93,10 +86,10 @@ class PersonalDAO {
     late Database db;
     try {
       const sql = 'SELECT * FROM personal';
-      db = await Conexao.getConexao();
-      List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
-      if (resultados.isEmpty) throw Exception('Sem registros');
-      List<PersonalTreiner> personal = resultados.map((resultado) {
+      Database db = await Conexao.getConexao();
+      List<Map<String, Object?>> resultado = (await db.rawQuery(sql));
+      if (resultado.isEmpty) throw Exception('Sem registros');
+      List<PersonalTreiner> gruposMusculares = resultado.map((resultado) {
         return PersonalTreiner(
             id: resultado['id'] as int,
             nome: resultado['nome'].toString(),
@@ -110,10 +103,33 @@ class PersonalDAO {
             senha: resultado['senha'].toString(),
             validadeCref: resultado['validadeCref'].toString());
       }).toList();
-      return personal;
+      return gruposMusculares;
     } catch (e) {
-      throw Exception('classe AlunoDAOSQLite, método listar');
-    } finally {
-    }
+      throw Exception('classe GrupoMuscularDAOQLite, método listar $e');
+    } finally {}
   }
+
+  /* @override
+  Future<List<PersonalTreiner>> listarPersonal() async {
+    late Database db;
+    const sql = 'SELECT * FROM personal';
+    db = await Conexao.getConexao();
+    List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
+    if (resultados.isEmpty) throw Exception('Sem registros');
+    List<PersonalTreiner> personal = resultados.map((resultado) {
+      return PersonalTreiner(
+          id: resultado['id'] as int,
+          nome: resultado['nome'].toString(),
+          CPF: resultado['cpf'].toString(),
+          telefone: resultado['telefone'].toString(),
+          dataNascimento: resultado['dataNascimento'].toString(),
+          endereco: resultado['endereco'].toString(),
+          status: resultado['status'].toString(),
+          cref: resultado['cref'].toString(),
+          permissao: resultado['permissao'].toString(),
+          senha: resultado['senha'].toString(),
+          validadeCref: resultado['validadeCref'].toString());
+    }).toList();
+    return personal;
+  }*/
 }

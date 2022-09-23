@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:starting_training/app/dao/alunoDAO.dart';
 import 'package:starting_training/app/dao/personalDAO.dart';
 import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 
-import '../../domain/entities/pessoaAluno.dart';
-
 class ListPersonalPage extends StatefulWidget {
+  const ListPersonalPage({Key? key}) : super(key: key);
+
   @override
   State<ListPersonalPage> createState() => _ListPersonalPageState();
 }
@@ -21,23 +19,23 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
       appBar: AppBar(
         title: const Text(
           'Perosnal',
-          textAlign: TextAlign.center,
         ),
+        centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add),
-            onPressed: () =>
+              icon: const Icon(Icons.person_add),
+              onPressed: () {
                 Navigator.pushNamed(context, '/registrationPersonalPage')
                     .then((value) {
-              setState(() {});
-            }),
-          ),
+                  setState(() {});
+                });
+              }),
         ],
       ),
       body: FutureBuilder(
         future: personalDAO.listarPersonal(),
         builder: (context, AsyncSnapshot<List<PersonalTreiner>> snapshot) {
-          if (!snapshot.hasData) return const CircularProgressIndicator();
+          if (!snapshot.hasData) return CircularProgressIndicator();
           var lista = snapshot.data!;
           return ListView.builder(
               itemCount: lista.length,

@@ -10,7 +10,7 @@ void main() async {
   setUp(() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
-    String path = join(await getDatabasesPath(), 'banco.db');
+    String path = join(await getDatabasesPath(), 'db');
     db = await Conexao.getConexao();
   });
 

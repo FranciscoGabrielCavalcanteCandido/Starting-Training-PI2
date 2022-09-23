@@ -7,7 +7,7 @@ final criarBanco = [
       )''',
   '''
         CREATE TABLE personal(
-          id INTEGER PRIMERY KEY,
+          id INTEGER PRIMERY KEY ,
           nome TEXT NOT NULL,
           cpf TEXT NOT NULL,
           telefone TEXT NOT NULL,
@@ -60,8 +60,5 @@ final criarBanco = [
           imc DOUBLE,
           aluno_id INTEGER NOT NULL,
           FOREIGN KEY (aluno_id) REFERENCES aluno(id)
-        )''',
-  '''INSERT INTO aluno (id, nome, cpf, telefone, dataNascimento, endereco,
-         status, senha, permissao, frequencia) 
-        VALUES (1,"edu","120","2020","2007","rua1","a","123","aluno",3)'''
+        )'''
 ];

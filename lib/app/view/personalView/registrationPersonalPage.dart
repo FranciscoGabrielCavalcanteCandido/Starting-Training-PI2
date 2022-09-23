@@ -2,32 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sqflite/sqlite_api.dart';
+import 'package:starting_training/app/dao/personalDAO.dart';
+import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 import 'package:starting_training/app/model/sqlite/conexao.dart';
+import 'package:starting_training/app/view/components/criarCampoInput.dart';
 
 class RegistrationPersonalPage extends StatelessWidget {
-  int? id;
-  String? nome;
+  PersonalDAO personalDAO = PersonalDAO();
+  PersonalTreiner? personal;
+  dynamic id;
+  dynamic nome;
   String? CPF;
   String? telefone;
   String? endereco;
   String? dataNascimento;
   String? status;
-  String? academia;
   String? senha;
   String permissao = 'personal';
   String? cref;
   String? validadeCref;
 
+  Widget _criarCampo(String rotulo, String? dica,
+      ValueChanged<String>? vincularValor, String? valorInicial) {
+    return TextFormField(
+      decoration: InputDecoration(label: Text(rotulo), hintText: dica),
+      onChanged: vincularValor,
+      initialValue: valorInicial ??= '',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var argumento = ModalRoute.of(context)?.settings.arguments;
+    if (argumento != null) {
+      Map<String, Object?> personal = argumento as Map<String, Object?>;
+      id = personal['id'] as int;
+      nome = personal['nome'] as String;
+      CPF = personal['cpf'] as String;
+      telefone = personal['telefone'] as String;
+      endereco = personal['endereco'] as String;
+      dataNascimento = personal['dataNascimento'] as String;
+      status = personal['status'] as String;
+      senha = personal['senha'] as String;
+      permissao = personal['permissao'] as String;
+      cref = personal['cref'] as String;
+      validadeCref = personal['validadeCref'] as String;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text('Cadastro de Personal'),
+        title: const Text('Cadastro de Personal'),
         centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 60,
           left: 40,
           right: 40,
@@ -35,78 +63,73 @@ class RegistrationPersonalPage extends StatelessWidget {
         child: Form(
           child: ListView(
             children: <Widget>[
-              TextField(
-                onChanged: (nomeDigitado) {
-                  nome = nomeDigitado;
-                },
-                decoration: InputDecoration(label: Text('Nome')),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (cpfDigitado) {
-                  CPF = cpfDigitado;
-                },
-                decoration: InputDecoration(label: Text('CPF')),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (telefoneDigitado) {
-                  telefone = telefoneDigitado;
-                },
-                decoration: InputDecoration(label: Text('Telefone')),
-              ),
-              TextField(
-                onChanged: (enderecoDigitado) {
-                  endereco = enderecoDigitado;
-                },
-                decoration: InputDecoration(label: Text('Endereço')),
-              ),
-              TextField(
-                onChanged: (academiaDigitada) {
-                  academia = academiaDigitada;
-                },
-                decoration: InputDecoration(label: Text('Academia')),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (dataNascimentoDigitado) {
-                  dataNascimento = dataNascimentoDigitado;
-                },
-                decoration: InputDecoration(label: Text('Data de Nascimento')),
-              ),
-              TextField(
-                onChanged: (senhaDigitada) {
-                  senha = senhaDigitada;
-                },
-                decoration: InputDecoration(label: Text('Senha')),
-              ),
-              TextField(
-                onChanged: (statusDigitado) {
-                  status = statusDigitado;
-                },
-                decoration: InputDecoration(label: Text('Status')),
-              ),
-              TextField(
-                onChanged: (text) {
-                  cref = text;
-                },
-                decoration: InputDecoration(label: Text('Cref')),
-              ),
-              TextField(
-                onChanged: (text) {
-                  validadeCref = text;
-                },
-                decoration: InputDecoration(label: Text('Validade Cref')),
-              ),
+              CampoTexto(
+                  rotulo: 'Nome',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valorDigitado) => nome = valorDigitado),
+              CampoTexto(
+                  rotulo: 'CPF',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valorDigitado) => CPF = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Telefone',
+                  tipo: TextInputType.number,
+                  vincularCampo: (valorDigitado) => telefone = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Data nascimento',
+                  tipo: TextInputType.datetime,
+                  vincularCampo: (valorDigitado) =>
+                      dataNascimento = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Endereço',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valorDigitado) => endereco = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Status',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valorDigitado) => status = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Senha',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valorDigitado) => senha = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Permissao',
+                  tipo: TextInputType.text,
+                  vincularCampo: (valodrDigitado) =>
+                      permissao = valodrDigitado),
+              CampoTexto(
+                  rotulo: 'Cref',
+                  tipo: TextInputType.number,
+                  vincularCampo: (valorDigitado) => cref = valorDigitado),
+              CampoTexto(
+                  rotulo: 'Validade Cref',
+                  tipo: TextInputType.datetime,
+                  vincularCampo: (valorDigitado) =>
+                      validadeCref = valorDigitado),
               Container(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   top: 30,
                   bottom: 20,
                 ),
                 child: ElevatedButton(
-                  child: Text('Salvar Personal'),
+                  child: const Text('Salvar Personal'),
                   onPressed: () {
-                    ///salvar(context, nome!, CPF!, telefone!, null);
+                    print('>>>>>>>$nome');
+                    personalDAO.salvarPersonal(
+                      PersonalTreiner(
+                          id: id,
+                          nome: nome!,
+                          CPF: CPF!,
+                          telefone: telefone!,
+                          dataNascimento: dataNascimento!,
+                          endereco: endereco!,
+                          status: status!,
+                          senha: senha!,
+                          permissao: permissao,
+                          cref: cref.toString(),
+                          validadeCref: validadeCref.toString()),
+                    );
+                    Navigator.pop(context);
                   },
                 ),
               )
