@@ -1,13 +1,13 @@
 final criarBanco = [
   '''CREATE TABLE treino (
-          id INTEGER PRIMERY KEY,
+          id INTEGER NOT NULL PRIMARY KEY,
           ordem INT NOT NULL,
           status TEXT NOT NULL,
           nome TEXT NOT NULL
       )''',
   '''
         CREATE TABLE personal(
-          id INTEGER PRIMERY KEY ,
+          id INTEGER NOT NULL PRIMARY KEY ,
           nome TEXT NOT NULL,
           cpf TEXT NOT NULL,
           telefone TEXT NOT NULL,
@@ -19,12 +19,9 @@ final criarBanco = [
           cref TEXT NOT NULL,
           validadeCref INT NOT NULL
       )''',
-  '''INSERT INTO personal (id,nome, cpf, telefone, dataNascimento, endereco,
-         status, senha, permissao, cref, validadeCref) 
-        VALUES (1,"chico","111","44","20/07","rua 1","ativo","123","persoal","123","07/2028")''',
   '''
         CREATE TABLE aluno(
-          id INTEGER PRIMERY KEY,
+          id INTEGER NOT NULL PRIMARY KEY,
           nome TEXT NOT NULL,
           cpf TEXT NOT NULL,
           telefone TEXT NOT NULL,
@@ -37,7 +34,7 @@ final criarBanco = [
       )''',
   '''
         CREATE TABLE exercicio(
-          id INTEGER PRIMERY KEY,
+          id INTEGER NOT NULL PRIMARY KEY,
           nome TEXT NOT NULL,
           peso TEXT NOT NULL,
           serie TEXT NOT NULL,
@@ -49,7 +46,7 @@ final criarBanco = [
       )''',
   '''
         CREATE TABLE medida(
-          id INTEGER PRIMERY KEY,
+          id INTEGER NOT NULL PRIMARY KEY,
           altura DOUBLE NOT NULL,
           pesoKg DOUBLE NOT NULL,
           cintura DOUBLE NOT NULL,

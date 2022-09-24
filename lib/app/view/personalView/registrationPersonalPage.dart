@@ -54,87 +54,77 @@ class RegistrationPersonalPage extends StatelessWidget {
         title: const Text('Cadastro de Personal'),
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.only(
-          top: 60,
-          left: 40,
-          right: 40,
-        ),
-        child: Form(
-          child: ListView(
-            children: <Widget>[
-              CampoTexto(
-                  rotulo: 'Nome',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valorDigitado) => nome = valorDigitado),
-              CampoTexto(
-                  rotulo: 'CPF',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valorDigitado) => CPF = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Telefone',
-                  tipo: TextInputType.number,
-                  vincularCampo: (valorDigitado) => telefone = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Data nascimento',
-                  tipo: TextInputType.datetime,
-                  vincularCampo: (valorDigitado) =>
-                      dataNascimento = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Endereço',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valorDigitado) => endereco = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Status',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valorDigitado) => status = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Senha',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valorDigitado) => senha = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Permissao',
-                  tipo: TextInputType.text,
-                  vincularCampo: (valodrDigitado) =>
-                      permissao = valodrDigitado),
-              CampoTexto(
-                  rotulo: 'Cref',
-                  tipo: TextInputType.number,
-                  vincularCampo: (valorDigitado) => cref = valorDigitado),
-              CampoTexto(
-                  rotulo: 'Validade Cref',
-                  tipo: TextInputType.datetime,
-                  vincularCampo: (valorDigitado) =>
-                      validadeCref = valorDigitado),
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 30,
-                  bottom: 20,
-                ),
-                child: ElevatedButton(
-                  child: const Text('Salvar Personal'),
-                  onPressed: () {
-                    print('>>>>>>>$nome');
-                    personalDAO.salvarPersonal(
-                      PersonalTreiner(
-                          id: id,
-                          nome: nome!,
-                          CPF: CPF!,
-                          telefone: telefone!,
-                          dataNascimento: dataNascimento!,
-                          endereco: endereco!,
-                          status: status!,
-                          senha: senha!,
-                          permissao: permissao,
-                          cref: cref.toString(),
-                          validadeCref: validadeCref.toString()),
-                    );
-                    Navigator.pop(context);
-                  },
-                ),
-              )
-            ],
-          ),
+      body: Form(
+        child: ListView(
+          children: <Widget>[
+            CampoTexto(
+                rotulo: 'Nome',
+                tipo: TextInputType.text,
+                vincularCampo: (valorDigitado) => nome = valorDigitado),
+            CampoTexto(
+                rotulo: 'CPF',
+                tipo: TextInputType.text,
+                vincularCampo: (valorDigitado) => CPF = valorDigitado),
+            CampoTexto(
+                rotulo: 'Telefone',
+                tipo: TextInputType.number,
+                vincularCampo: (valorDigitado) => telefone = valorDigitado),
+            CampoTexto(
+                rotulo: 'Data nascimento',
+                tipo: TextInputType.datetime,
+                vincularCampo: (valorDigitado) =>
+                    dataNascimento = valorDigitado),
+            CampoTexto(
+                rotulo: 'Endereço',
+                tipo: TextInputType.text,
+                vincularCampo: (valorDigitado) => endereco = valorDigitado),
+            CampoTexto(
+                rotulo: 'Status',
+                tipo: TextInputType.text,
+                vincularCampo: (valorDigitado) => status = valorDigitado),
+            CampoTexto(
+                rotulo: 'Senha',
+                tipo: TextInputType.text,
+                vincularCampo: (valorDigitado) => senha = valorDigitado),
+            CampoTexto(
+                rotulo: 'Permissao',
+                tipo: TextInputType.text,
+                vincularCampo: (valodrDigitado) => permissao = valodrDigitado),
+            CampoTexto(
+                rotulo: 'Cref',
+                tipo: TextInputType.number,
+                vincularCampo: (valorDigitado) => cref = valorDigitado),
+            CampoTexto(
+                rotulo: 'Validade Cref',
+                tipo: TextInputType.datetime,
+                vincularCampo: (valorDigitado) => validadeCref = valorDigitado),
+            Container(
+              padding: const EdgeInsets.only(
+                top: 30,
+                bottom: 20,
+              ),
+              child: ElevatedButton(
+                child: const Text('Salvar Personal'),
+                onPressed: () {
+                  personalDAO.salvarPersonal(
+                    PersonalTreiner(
+                        id: id,
+                        nome: nome!,
+                        CPF: CPF!,
+                        telefone: telefone!,
+                        dataNascimento: dataNascimento!,
+                        endereco: endereco!,
+                        status: status!,
+                        senha: senha!,
+                        permissao: permissao,
+                        cref: cref.toString(),
+                        validadeCref: validadeCref.toString()),
+                  );
+                  Navigator.pop(context);
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

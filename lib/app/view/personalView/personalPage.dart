@@ -46,6 +46,9 @@ class PersonalPage extends StatelessWidget {
               ),
             ),
             Container(
+              height: 30,
+            ),
+            Container(
               height: 40,
               width: 40,
               decoration: BoxDecoration(

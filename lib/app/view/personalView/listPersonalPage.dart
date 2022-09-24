@@ -43,9 +43,31 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                 var personal = lista[contador];
                 return ListTile(
                   title: Text(personal.nome),
-                  trailing: const SizedBox(
-                    width: 100,
-                  ),
+                  subtitle: Text(personal.id.toString()),
+                  trailing: SizedBox(
+                      width: 100,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                      context, '/registrationPersonalPage')
+                                  .then((value) {
+                                setState(() {});
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => personalDAO
+                                .excluirPersonal(personal.id)
+                                .then((value) {
+                              setState(() {});
+                            }),
+                          ),
+                        ],
+                      )),
                 );
               });
         },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starting_training/app/view/admPage.dart';
+import 'package:starting_training/app/view/alunoView/listAlunoPage.dart';
 import 'package:starting_training/app/view/alunoView/registrationAlunoPage.dart';
 
 import 'package:starting_training/app/view/my_homePage.dart';
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
         '/tarefaForm': (context) => TarefaForm(),
         '/tareaList': (context) => TarefaLista(),
         '/personalPage': (context) => PersonalPage(),
+        '/listAlunoPage': (context) => ListAlunoPage(),
+    
       },
     );
   }
