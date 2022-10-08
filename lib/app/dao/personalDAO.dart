@@ -103,25 +103,12 @@ class PersonalDAO {
   }
 
   @override
-  Future<List<PersonalTreiner>> listarPersonal() async {
+  Future<List<Map<String, Object?>>> listarPersonal() async {
     const sql = 'SELECT * FROM personal';
     db = await Conexao.getConexao();
     List<Map<String, Object?>> resultado = (await db.rawQuery(sql));
     if (resultado.isEmpty) throw Exception('Sem registros');
-    List<PersonalTreiner> gruposMusculares = resultado.map((resultado) {
-      return PersonalTreiner(
-          id: resultado['id'] as int,
-          nome: resultado['nome'].toString(),
-          CPF: resultado['cpf'].toString(),
-          telefone: resultado['telefone'].toString(),
-          dataNascimento: resultado['dataNascimento'].toString(),
-          endereco: resultado['endereco'].toString(),
-          status: resultado['status'].toString(),
-          cref: resultado['cref'].toString(),
-          permissao: resultado['permissao'].toString(),
-          senha: resultado['senha'].toString(),
-          validadeCref: resultado['validadeCref'].toString());
-    }).toList();
-    return gruposMusculares;
+
+    return resultado;
   }
 }

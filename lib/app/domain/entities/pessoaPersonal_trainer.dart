@@ -4,7 +4,7 @@ import 'package:starting_training/app/domain/entities/pessoa.dart';
 
 class PersonalTreiner extends Pessoa {
   final String cref;
-  String validadeCref;
+  dynamic validadeCref;
 
   PersonalTreiner({
     required id,

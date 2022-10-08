@@ -34,7 +34,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
       ),
       body: FutureBuilder(
         future: personalDAO.listarPersonal(),
-        builder: (context, AsyncSnapshot<List<PersonalTreiner>> snapshot) {
+        builder: (context, AsyncSnapshot<List<Map<String, Object?>>> snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
           var lista = snapshot.data!;
           return ListView.builder(
@@ -42,8 +42,8 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
               itemBuilder: (context, contador) {
                 var personal = lista[contador];
                 return ListTile(
-                  title: Text(personal.nome),
-                  subtitle: Text(personal.id.toString()),
+                  title: Text(personal["nome"].toString()),
+                  subtitle: Text(personal["id"].toString()),
                   trailing: SizedBox(
                       width: 100,
                       child: Row(
@@ -52,7 +52,8 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                             icon: Icon(Icons.edit),
                             onPressed: () {
                               Navigator.pushNamed(
-                                      context, '/registrationPersonalPage')
+                                      context, '/registrationPersonalPage',
+                                      arguments: personal)
                                   .then((value) {
                                 setState(() {});
                               });
@@ -60,8 +61,9 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                           ),
                           IconButton(
                             icon: Icon(Icons.delete),
+                            color: Colors.red,
                             onPressed: () => personalDAO
-                                .excluirPersonal(personal.id)
+                                .excluirPersonal(personal["id"] as int)
                                 .then((value) {
                               setState(() {});
                             }),

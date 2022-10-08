@@ -96,7 +96,7 @@ class RegistrationPersonalPage extends StatelessWidget {
                 vincularCampo: (valorDigitado) => cref = valorDigitado),
             CampoTexto(
                 rotulo: 'Validade Cref',
-                tipo: TextInputType.datetime,
+                tipo: TextInputType.text,
                 vincularCampo: (valorDigitado) => validadeCref = valorDigitado),
             Container(
               padding: const EdgeInsets.only(
@@ -108,17 +108,18 @@ class RegistrationPersonalPage extends StatelessWidget {
                 onPressed: () {
                   personalDAO.salvarPersonal(
                     PersonalTreiner(
-                        id: id,
-                        nome: nome!,
-                        CPF: CPF!,
-                        telefone: telefone!,
-                        dataNascimento: dataNascimento!,
-                        endereco: endereco!,
-                        status: status!,
-                        senha: senha!,
-                        permissao: permissao,
-                        cref: cref.toString(),
-                        validadeCref: validadeCref.toString()),
+                      id: id,
+                      nome: nome!,
+                      CPF: CPF!,
+                      telefone: telefone!,
+                      dataNascimento: dataNascimento!,
+                      endereco: endereco!,
+                      status: status!,
+                      validadeCref: validadeCref.toString(),
+                      senha: senha!,
+                      cref: cref!,
+                      permissao: permissao,
+                    ),
                   );
                   Navigator.pop(context);
                 },
