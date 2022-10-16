@@ -7,11 +7,11 @@ class PersonalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 47, 47, 47),
-        title: Text("Pagina Personal"),
+        backgroundColor: const Color.fromARGB(255, 47, 47, 47),
+        title: const Text("Pagina Personal"),
       ),
       body: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 200,
           left: 40,
           right: 40,
@@ -21,11 +21,11 @@ class PersonalPage extends StatelessWidget {
             Container(
               height: 40,
               width: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.amber,
               ),
               child: ElevatedButton(
-                child: Text("Alunos"),
+                child: const Text("Alunos"),
                 onPressed: () =>
                     Navigator.popAndPushNamed(context, "/listAlunoPage"),
               ),
@@ -36,11 +36,11 @@ class PersonalPage extends StatelessWidget {
             Container(
               height: 40,
               width: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.amber,
               ),
               child: ElevatedButton(
-                child: Text("Treinos"),
+                child: const Text("Treinos"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/registrationTreinoPage"),
               ),
@@ -51,11 +51,11 @@ class PersonalPage extends StatelessWidget {
             Container(
               height: 40,
               width: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.amber,
               ),
               child: ElevatedButton(
-                child: Text("Relatórios"),
+                child: const Text("Relatórios"),
                 onPressed: () => Navigator.popAndPushNamed(
                     context, "/generationRelatorioPage"),
               ),

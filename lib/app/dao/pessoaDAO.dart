@@ -1,32 +1,27 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:starting_training/app/dao/loginDAO.dart';
-import 'package:starting_training/app/domain/entities/login.dart';
+/*import 'package:sqflite/sqflite.dart';
+import 'package:starting_training/app/domain/entities/pessoa.dart';
 
-import '../domain/entities/pessoaPersonal_trainer.dart';
 import '../model/sqlite/conexao.dart';
 
 class PersonalDAO {
-  LoginDAO loginDAO = LoginDAO();
   late Database db;
-  Future<bool> salvarPersonal(PersonalTreiner personalTreiner) async {
+  Future<bool> salvarPersonal(Pessoa pessoa) async {
     db = await Conexao.getConexao();
     var linhasAfetadas;
-    if (personalTreiner.id == null) {
+    if (pessoa.id == null) {
       const sql =
           '''INSERT INTO personal (nome, cpf, telefone, dataNascimento, endereco,
          status, senha, permissao, cref, validadeCref) 
         VALUES (?,?,?,?,?,?,?,?,?,?)''';
       linhasAfetadas = await db.rawInsert(sql, [
-        personalTreiner.nome,
-        personalTreiner.CPF,
-        personalTreiner.telefone,
-        personalTreiner.dataNascimento,
-        personalTreiner.endereco,
-        personalTreiner.status,
-        personalTreiner.senha,
-        personalTreiner.permissao,
-        personalTreiner.cref,
-        personalTreiner.validadeCref,
+        pessoa.nome,
+        pessoa.CPF,
+        pessoa.telefone,
+        pessoa.dataNascimento,
+        pessoa.endereco,
+        pessoa.status,
+        pessoa.senha,
+        pessoa.permissao
       ]);
     } else {
       const sql =
@@ -47,11 +42,6 @@ class PersonalDAO {
       ]);
     }
 
-    loginDAO.salvarLogin(Login(
-        CPF: personalTreiner.CPF,
-        id: personalTreiner.id,
-        senha: personalTreiner.senha,
-        permissao: personalTreiner.permissao));
     return linhasAfetadas > 0;
   }
 
@@ -120,3 +110,4 @@ class PersonalDAO {
     return resultado;
   }
 }
+*/

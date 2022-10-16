@@ -1,57 +1,29 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:starting_training/app/dao/loginDAO.dart';
 import 'package:starting_training/app/domain/entities/login.dart';
 
 import '../domain/entities/pessoaPersonal_trainer.dart';
 import '../model/sqlite/conexao.dart';
 
-class PersonalDAO {
-  LoginDAO loginDAO = LoginDAO();
+class LoginDAO {
   late Database db;
-  Future<bool> salvarPersonal(PersonalTreiner personalTreiner) async {
+  Future<bool> salvarLogin(Login login) async {
     db = await Conexao.getConexao();
     var linhasAfetadas;
-    if (personalTreiner.id == null) {
+    if (login.id == null) {
       const sql =
           '''INSERT INTO personal (nome, cpf, telefone, dataNascimento, endereco,
          status, senha, permissao, cref, validadeCref) 
         VALUES (?,?,?,?,?,?,?,?,?,?)''';
-      linhasAfetadas = await db.rawInsert(sql, [
-        personalTreiner.nome,
-        personalTreiner.CPF,
-        personalTreiner.telefone,
-        personalTreiner.dataNascimento,
-        personalTreiner.endereco,
-        personalTreiner.status,
-        personalTreiner.senha,
-        personalTreiner.permissao,
-        personalTreiner.cref,
-        personalTreiner.validadeCref,
-      ]);
+      linhasAfetadas =
+          await db.rawInsert(sql, [login.CPF, login.senha, login.permissao]);
     } else {
       const sql =
           '''UPDATE personal SET nome=?, cpf=?, telefone=?, dataNascimento=?, endereco=?, status=?, senha=?, permissao=?, cref=?, validadeCref=? WHERE id = ?''';
       db = await Conexao.getConexao();
-      linhasAfetadas = await db.rawUpdate(sql, [
-        personalTreiner.nome,
-        personalTreiner.CPF,
-        personalTreiner.telefone,
-        personalTreiner.dataNascimento,
-        personalTreiner.endereco,
-        personalTreiner.status,
-        personalTreiner.senha,
-        personalTreiner.permissao,
-        personalTreiner.cref,
-        personalTreiner.validadeCref,
-        personalTreiner.id
-      ]);
+      linhasAfetadas = await db
+          .rawUpdate(sql, [login.CPF, login.senha, login.permissao, login.id]);
     }
 
-    loginDAO.salvarLogin(Login(
-        CPF: personalTreiner.CPF,
-        id: personalTreiner.id,
-        senha: personalTreiner.senha,
-        permissao: personalTreiner.permissao));
     return linhasAfetadas > 0;
   }
 
