@@ -6,7 +6,7 @@ import 'package:starting_training/app/dao/alunoDAO.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
 import 'package:starting_training/app/model/sqlite/conexao.dart';
 
-void main() async {
+/*void main() async {
   late Database db;
   late Aluno aluno;
   late AlunoDAO alunoDAO;
@@ -55,4 +55,4 @@ void main() async {
       expect(resultado, isInstanceOf<Aluno>());
     });
   });
-}
+}*/

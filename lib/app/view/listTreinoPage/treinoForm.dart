@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:starting_training/app/dao/treinoDAO.dart';
+import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+import 'package:starting_training/app/domain/entities/treino.dart';
 
 // ignore: must_be_immutable
-class TarefaForm extends StatelessWidget {
+class TreinoForm extends StatefulWidget {
+  TreinoForm({Key? key}) : super(key: key);
+
+  @override
+  State<TreinoForm> createState() => _TreinoFormState();
+}
+
+class _TreinoFormState extends State<TreinoForm> {
   dynamic id;
-  String? nome;
-  String? descricao;
+  late String nome;
+  late String ordem;
+  late String status;
+  late Aluno aluno;
 
-  TarefaForm({Key? key}) : super(key: key);
-
-  Future<int> salvar() async {
-    String path = join(await getDatabasesPath(), 'banco.db');
-    //deleteDatabase(path);
-    Database database = await openDatabase(path, version: 1);
-    String sql;
-    Future<int> linhasAfetadas;
-    if (id == null) {
-      sql = 'INSERT INTO tarefa (nome, descricao) VALUES (?,?)';
-      linhasAfetadas = database.rawInsert(sql, [nome, descricao]);
-    } else {
-      sql = 'UPDATE tarefa SET nome = ?, descricao =? WHERE id = ?';
-      linhasAfetadas = database.rawUpdate(sql, [nome, descricao, id]);
-    }
-    return linhasAfetadas;
-  }
+  TreinoDAO treinoDAO = TreinoDAO();
 
   Widget _criarCampo(String rotulo, String? dica,
       ValueChanged<String>? vincularValor, String? valorInicial) {
@@ -37,22 +33,20 @@ class TarefaForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var argumaneto = ModalRoute.of(context)?.settings.arguments;
+    var argumento = ModalRoute.of(context)?.settings.arguments;
 
-    if (argumaneto != null) {
-      Map<String, Object?> terefa = argumaneto as Map<String, Object?>;
-      id = terefa['id'] as int;
-      nome = terefa['nome'] as String;
-      descricao = terefa['descricao'] as String;
+    if (argumento != null) {
+      Treino treino = argumento as Treino;
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro Tarefa'),
+        title: const Text('Cadastro de treino'),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () {
-              salvar();
+              treinoDAO.salvarTreino(Treino(
+                  nome: nome, ordem: ordem, status: status, aluno: aluno));
               Navigator.pop(context);
             },
           ),
@@ -60,12 +54,7 @@ class TarefaForm extends StatelessWidget {
       ),
       body: Form(
         child: Column(
-          children: [
-            _criarCampo('Nome', 'Digite seu nome',
-                (valorDigitado) => nome = valorDigitado, nome),
-            _criarCampo('Descrição', 'Descreva a tarefa',
-                (valorDigitado) => descricao = valorDigitado, descricao),
-          ],
+          children: [],
         ),
       ),
     );

@@ -28,11 +28,10 @@ class MyApp extends StatelessWidget {
         '/registrationPersonalPage': (context) => RegistrationPersonalPage(),
         '/registrationAlunoPage': (context) => RegistrationAlunoPage(),
         '/listPersonalPage': (context) => ListPersonalPage(),
-        '/tarefaForm': (context) => TarefaForm(),
+        '/treinoForm': (context) => TreinoForm(),
         '/tareaList': (context) => TarefaLista(),
         '/personalPage': (context) => PersonalPage(),
         '/listAlunoPage': (context) => ListAlunoPage(),
-    
       },
     );
   }

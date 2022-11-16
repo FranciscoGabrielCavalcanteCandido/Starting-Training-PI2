@@ -1,9 +1,9 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 import '../model/sqlite/conexao.dart';
 
 class AlunoDAO {
-  
   Future<bool> salvarAluno(Aluno aluno) async {
     Database db = await Conexao.getConexao();
     const sql =
@@ -52,8 +52,7 @@ class AlunoDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception(e);
-    } finally {
-    }
+    } finally {}
   }
 
   Future<Aluno> consultarAluno(int id) async {
@@ -64,22 +63,21 @@ class AlunoDAO {
       Map<String, Object?> resultado = (await db.rawQuery(sql, [id])).first;
       if (resultado.isEmpty) throw Exception('Sem registros com este id');
       Aluno aluno = Aluno(
-        id: resultado['id'] as int,
-        nome: resultado['nome'].toString(),
-        CPF: resultado['cpf'].toString(),
-        telefone: resultado['telefone'].toString(),
-        dataNascimento: resultado['dataNascimento'].toString(),
-        endereco: resultado['endereco'].toString(),
-        status: resultado['status'].toString(),
-        frequencia: resultado['frequencia'] as int,
-        permissao: resultado['permissao'].toString(),
-        senha: resultado['senha'].toString(),
-      );
+          id: resultado['id'] as int,
+          nome: resultado['nome'].toString(),
+          CPF: resultado['cpf'].toString(),
+          telefone: resultado['telefone'].toString(),
+          dataNascimento: resultado['dataNascimento'].toString(),
+          endereco: resultado['endereco'].toString(),
+          status: resultado['status'].toString(),
+          frequencia: resultado['frequencia'] as int,
+          permissao: resultado['permissao'].toString(),
+          senha: resultado['senha'].toString(),
+          personal: resultado['personal_id'] as PersonalTreiner);
       return aluno;
     } catch (e) {
       throw Exception('classe AlunoDAO, método consultar');
-    } finally {
-    }
+    } finally {}
   }
 
   @override
@@ -92,22 +90,21 @@ class AlunoDAO {
       if (resultados.isEmpty) throw Exception('Sem registros');
       List<Aluno> alunos = resultados.map((resultado) {
         return Aluno(
-          id: resultado['id'] as int,
-          nome: resultado['nome'].toString(),
-          CPF: resultado['cpf'].toString(),
-          telefone: resultado['telefone'].toString(),
-          dataNascimento: resultado['dataNascimento'].toString(),
-          endereco: resultado['endereco'].toString(),
-          status: resultado['status'].toString(),
-          frequencia: resultado['frequencia'] as int,
-          permissao: resultado['permissao'].toString(),
-          senha: resultado['senha'].toString(),
-        );
+            id: resultado['id'] as int,
+            nome: resultado['nome'].toString(),
+            CPF: resultado['cpf'].toString(),
+            telefone: resultado['telefone'].toString(),
+            dataNascimento: resultado['dataNascimento'].toString(),
+            endereco: resultado['endereco'].toString(),
+            status: resultado['status'].toString(),
+            frequencia: resultado['frequencia'] as int,
+            permissao: resultado['permissao'].toString(),
+            senha: resultado['senha'].toString(),
+            personal: resultado['personal_id'] as PersonalTreiner);
       }).toList();
       return alunos;
     } catch (e) {
       throw Exception(e);
-    } finally {
-    }
+    } finally {}
   }
 }

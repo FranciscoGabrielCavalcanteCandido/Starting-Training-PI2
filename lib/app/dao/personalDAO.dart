@@ -46,7 +46,6 @@ class PersonalDAO {
         personalTreiner.id
       ]);
     }
-
     loginDAO.salvarLogin(Login(
         CPF: personalTreiner.CPF,
         id: personalTreiner.id,
@@ -55,25 +54,6 @@ class PersonalDAO {
     return linhasAfetadas > 0;
   }
 
-  Future<bool> alterarPersonal(PersonalTreiner personalTreiner) async {
-    const sql =
-        'UPDATE personal SET nome=?, cpf=?, telefone=?, dataNascimento=?, endereco=?, status=?, senha=?, permissao=?, cref=?, validadeCref=? WHERE id = ?';
-    db = await Conexao.getConexao();
-    var linhasAfetadas = await db.rawUpdate(sql, [
-      personalTreiner.nome,
-      personalTreiner.CPF,
-      personalTreiner.telefone,
-      personalTreiner.dataNascimento,
-      personalTreiner.endereco,
-      personalTreiner.status,
-      personalTreiner.senha,
-      personalTreiner.permissao,
-      personalTreiner.cref,
-      personalTreiner.validadeCref,
-      personalTreiner.id
-    ]);
-    return linhasAfetadas > 0;
-  }
 
   Future<bool> excluirPersonal(int id) async {
     try {

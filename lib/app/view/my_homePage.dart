@@ -10,7 +10,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   String? CPF;
   String? senha;
   String? permissao;
@@ -23,33 +22,31 @@ class _MyHomePageState extends State<MyHomePage> {
     } else if (permissao == 'aluno') {}
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Color.fromARGB(255, 47, 47, 47),
+        backgroundColor: const Color.fromARGB(255, 47, 47, 47),
       ),
       body: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 60,
           left: 40,
           right: 40,
         ),
         child: ListView(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               width: 150,
               height: 150,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextFormField(
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "CPF",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -61,13 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 CPF = text;
               },
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             TextFormField(
               keyboardType: TextInputType.text,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Senha",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -82,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 30,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Container(
@@ -95,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: Colors.amber, shape: const StadiumBorder()),
-                child: Text("Entrar"),
+                child: const Text("Entrar"),
                 onPressed: () => definirRota(CPF, senha),
               ),
             ),

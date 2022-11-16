@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:starting_training/app/domain/entities/login.dart';
-
-import '../domain/entities/pessoaPersonal_trainer.dart';
 import '../model/sqlite/conexao.dart';
 
 class LoginDAO {
@@ -10,15 +8,12 @@ class LoginDAO {
     db = await Conexao.getConexao();
     var linhasAfetadas;
     if (login.id == null) {
-      const sql =
-          '''INSERT INTO personal (nome, cpf, telefone, dataNascimento, endereco,
-         status, senha, permissao, cref, validadeCref) 
-        VALUES (?,?,?,?,?,?,?,?,?,?)''';
+      const sql = '''INSERT INTO login (cpf,senha, permissao) 
+        VALUES (?,?,?)''';
       linhasAfetadas =
           await db.rawInsert(sql, [login.CPF, login.senha, login.permissao]);
     } else {
-      const sql =
-          '''UPDATE personal SET nome=?, cpf=?, telefone=?, dataNascimento=?, endereco=?, status=?, senha=?, permissao=?, cref=?, validadeCref=? WHERE id = ?''';
+      const sql = '''UPDATE login SET cpf=?, senha=?, permissao=? WHERE id=?''';
       db = await Conexao.getConexao();
       linhasAfetadas = await db
           .rawUpdate(sql, [login.CPF, login.senha, login.permissao, login.id]);
@@ -27,29 +22,9 @@ class LoginDAO {
     return linhasAfetadas > 0;
   }
 
-  Future<bool> alterarPersonal(PersonalTreiner personalTreiner) async {
-    const sql =
-        'UPDATE personal SET nome=?, cpf=?, telefone=?, dataNascimento=?, endereco=?, status=?, senha=?, permissao=?, cref=?, validadeCref=? WHERE id = ?';
-    db = await Conexao.getConexao();
-    var linhasAfetadas = await db.rawUpdate(sql, [
-      personalTreiner.nome,
-      personalTreiner.CPF,
-      personalTreiner.telefone,
-      personalTreiner.dataNascimento,
-      personalTreiner.endereco,
-      personalTreiner.status,
-      personalTreiner.senha,
-      personalTreiner.permissao,
-      personalTreiner.cref,
-      personalTreiner.validadeCref,
-      personalTreiner.id
-    ]);
-    return linhasAfetadas > 0;
-  }
-
-  Future<bool> excluirPersonal(int id) async {
+  Future<bool> excluirLogin(int id) async {
     try {
-      const sql = 'DELETE FROM personal WHERE id = ?';
+      const sql = 'DELETE FROM login WHERE id = ?';
       db = await Conexao.getConexao();
       int linhasAfetadas = await db.rawDelete(sql, [id]);
       return linhasAfetadas > 0;
@@ -58,37 +33,65 @@ class LoginDAO {
     } finally {}
   }
 
-  Future<PersonalTreiner> consultarPersonal(int id) async {
+  Future<Login> consultarLogin(int id) async {
     try {
-      const sql = "SELECT * FROM personal WHERE id=?";
+      const sql = "SELECT * FROM login WHERE id=?";
       db = await Conexao.getConexao();
       Map<String, Object?> resultado = (await db.rawQuery(sql, [id])).first;
       if (resultado.isEmpty) throw Exception('Sem registros com este id');
-      PersonalTreiner personalTreiner = PersonalTreiner(
-          id: resultado['id'] as int,
-          nome: resultado['nome'].toString(),
+      Login login = Login(
           CPF: resultado['cpf'].toString(),
-          telefone: resultado['telefone'].toString(),
-          dataNascimento: resultado['dataNascimento'].toString(),
-          endereco: resultado['endereco'].toString(),
-          status: resultado['status'].toString(),
-          cref: resultado['cref'].toString(),
-          permissao: resultado['permissao'].toString(),
+          id: resultado['id'],
           senha: resultado['senha'].toString(),
-          validadeCref: resultado['validadeCref'].toString());
-      return personalTreiner;
+          permissao: resultado['permissao'].toString());
+      return login;
     } catch (e) {
       throw Exception('classe PersonalDAO, método consultar');
     } finally {}
   }
 
   @override
-  Future<List<Map<String, Object?>>> listarPersonal() async {
-    const sql = 'SELECT * FROM personal';
+  Future<List<Map<String, Object?>>> listarLogin() async {
+    const sql = 'SELECT * FROM login';
     db = await Conexao.getConexao();
     List<Map<String, Object?>> resultado = (await db.rawQuery(sql));
     if (resultado.isEmpty) throw Exception('Sem registros');
 
     return resultado;
+  }
+
+  Future<String> verificaCpf(String cpfDigitado) async {
+    db = await Conexao.getConexao();
+    var sqlCpf = 'SELECT cpf FROM login WHERE cpf=?';
+    var cpf = (await db.rawQuery(sqlCpf, [cpfDigitado]));
+    if (cpf.isEmpty) throw Exception('CPF inválido');
+    return cpf.toString();
+  }
+
+  Future<String> verificaSenha(String senhaDigitada) async {
+    db = await Conexao.getConexao();
+    var sqlSenha = 'SELECT senha FROM login WHERE senha=?';
+    var senha = (await db.rawQuery(sqlSenha, [
+      senhaDigitada,
+    ]));
+    if (senha.isEmpty) throw Exception('Senha inválida');
+    return senha.toString();
+  }
+
+  Future<bool> verificaLogin(Login loginDigitado) async {
+    db = await Conexao.getConexao();
+    bool valido = false;
+    var sqlLogin = 'SELECT senha FROM login WHERE cpf=?';
+    var login = (await db.rawQuery(sqlLogin, [loginDigitado.CPF]));
+    if (!login.isEmpty) valido = true;
+
+    return valido;
+  }
+
+  Future<String> pegaPermissao(Login login) async {
+    db = await Conexao.getConexao();
+    var sql = 'SELECT permissao FROM login WHERE senha=?';
+    var permissao = (await db.rawQuery(sql, [login.CPF]));
+    return permissao.toString();
   }
 }

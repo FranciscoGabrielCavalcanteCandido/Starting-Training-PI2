@@ -86,7 +86,6 @@ class MedidaDAO {
     }
   }
 
-  @override
   Future<List<Medida>> listarMedidas() async {
     late Database db;
     try {
@@ -105,7 +104,7 @@ class MedidaDAO {
             perna: resultado['perna'] as double,
             dataAvaliacao: resultado['data_avaliacao'] as DateTime,
             imc: resultado['imc'] as double,
-            aluno: resultado['aluno'] as Aluno);
+            aluno: resultado['aluno_id'] as Aluno);
       }).toList();
       return medidas;
     } catch (e) {

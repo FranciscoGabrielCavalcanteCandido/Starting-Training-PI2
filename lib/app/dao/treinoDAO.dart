@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
 import 'package:starting_training/app/domain/entities/treino.dart';
 
 import '../model/sqlite/conexao.dart';
@@ -32,9 +33,7 @@ class TreinoDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe TreinoDAOSQLite, método excluir');
-    } finally {
-      
-    }
+    } finally {}
   }
 
   Future<Treino> consultarExercicio(int id) async {
@@ -47,14 +46,13 @@ class TreinoDAO {
       Treino treino = Treino(
           id: resultado['id'] as int,
           nome: resultado['nome'].toString(),
-          ordem: resultado['ordem'] as int,
-          status: resultado['status'].toString());
+          ordem: resultado['ordem'].toString(),
+          status: resultado['status'].toString(),
+          aluno: resultado['aluno_id'] as Aluno);
       return treino;
     } catch (e) {
       throw Exception('classe TreinoDAO, método consultar');
-    } finally {
-      
-    } 
+    } finally {}
   }
 
   @override
@@ -69,14 +67,13 @@ class TreinoDAO {
         return Treino(
             id: resultado['id'] as int,
             nome: resultado['nome'].toString(),
-            ordem: resultado['ordem'] as int,
-            status: resultado['status'].toString());
+            ordem: resultado['ordem'].toString(),
+            status: resultado['status'].toString(),
+            aluno: resultado['aluno_id'] as Aluno);
       }).toList();
       return treinos;
     } catch (e) {
       throw Exception('classe TreinoDAOSQLite, método listar');
-    } finally {
-      
-    }
+    } finally {}
   }
 }
