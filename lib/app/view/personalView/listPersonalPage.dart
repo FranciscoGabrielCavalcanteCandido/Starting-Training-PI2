@@ -24,8 +24,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
           IconButton(
               icon: const Icon(Icons.person_add),
               onPressed: () {
-                Navigator.pushNamed(context, '/registrationPersonalPage')
-                    .then((value) {
+                Navigator.pushNamed(context, '/PersonalForm').then((value) {
                   setState(() {});
                 });
               }),
@@ -50,8 +49,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                           IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {
-                              Navigator.pushNamed(
-                                      context, '/registrationPersonalPage',
+                              Navigator.pushNamed(context, '/PersonalForm',
                                       arguments: personal)
                                   .then((value) {
                                 setState(() {});

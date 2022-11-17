@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:starting_training/app/dao/alunoDAO.dart';
+import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
 
-class RegistrationAlunoPage extends StatelessWidget {
+class AlunoForm extends StatefulWidget {
+  const AlunoForm({Key? key}) : super(key: key);
+
+  @override
+  State<AlunoForm> createState() => _AlunoFormState();
+}
+
+class _AlunoFormState extends State<AlunoForm> {
+  AlunoDAO alunoDAO = AlunoDAO();
+  Aluno? aluno;
   int? id;
   String? nome;
   String? CPF;
@@ -10,6 +21,7 @@ class RegistrationAlunoPage extends StatelessWidget {
   String? status;
   String? academia;
   String? senha;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +37,7 @@ class RegistrationAlunoPage extends StatelessWidget {
             right: 40,
           ),
           child: Form(
+            key: formKey,
             child: ListView(
               children: <Widget>[
                 TextField(

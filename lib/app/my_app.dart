@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:starting_training/app/view/admPage.dart';
 import 'package:starting_training/app/view/alunoView/listAlunoPage.dart';
-import 'package:starting_training/app/view/alunoView/registrationAlunoPage.dart';
+import 'package:starting_training/app/view/alunoView/alunoForm.dart';
 
 import 'package:starting_training/app/view/my_homePage.dart';
 import 'package:starting_training/app/view/personalView/listPersonalPage.dart';
 import 'package:starting_training/app/view/personalView/personalPage.dart';
-import 'package:starting_training/app/view/personalView/registrationPersonalPage.dart';
+import 'package:starting_training/app/view/personalView/personalForm.dart';
 
-import 'view/listTreinoPage/listTreino.dart';
-import 'view/listTreinoPage/treinoForm.dart';
+import 'view/treinoView/listTreino.dart';
+import 'view/treinoView/treinoForm.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,11 +25,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyHomePage(title: "Start Training"),
         '/admPage': (context) => AdmPage(),
-        '/registrationPersonalPage': (context) => RegistrationPersonalPage(),
-        '/registrationAlunoPage': (context) => RegistrationAlunoPage(),
+        '/personalForm': (context) => PerssonalForm(),
+        '/alunoForm': (context) => AlunoForm(),
         '/listPersonalPage': (context) => ListPersonalPage(),
         '/treinoForm': (context) => TreinoForm(),
-        '/tareaList': (context) => TarefaLista(),
         '/personalPage': (context) => PersonalPage(),
         '/listAlunoPage': (context) => ListAlunoPage(),
       },
