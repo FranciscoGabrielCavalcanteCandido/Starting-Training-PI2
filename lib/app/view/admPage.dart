@@ -28,7 +28,7 @@ class AdmPage extends StatelessWidget {
               child: ElevatedButton(
                 child: Text("Personal"),
                 onPressed: () =>
-                    Navigator.popAndPushNamed(context, "/listPersonalPage"),
+                    Navigator.pushNamed(context, "/listPersonalPage"),
               ),
             ),
             Container(

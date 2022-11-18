@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starting_training/app/dao/personalDAO.dart';
+import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 
 class ListPersonalPage extends StatefulWidget {
   const ListPersonalPage({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
       ),
       body: FutureBuilder(
         future: personalDAO.listarPersonal(),
-        builder: (context, AsyncSnapshot<List<Map<String, Object?>>> snapshot) {
+        builder: (context, AsyncSnapshot<List<PersonalTreiner>> snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
           var lista = snapshot.data!;
           return ListView.builder(
@@ -40,8 +41,8 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
               itemBuilder: (context, contador) {
                 var personal = lista[contador];
                 return ListTile(
-                  title: Text(personal["nome"].toString()),
-                  subtitle: Text(personal["id"].toString()),
+                  title: Text(personal.nome),
+                  subtitle: Text(personal.id),
                   trailing: SizedBox(
                       width: 100,
                       child: Row(
@@ -60,7 +61,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                             icon: const Icon(Icons.delete),
                             color: Colors.red,
                             onPressed: () => personalDAO
-                                .excluirPersonal(personal["id"] as int)
+                                .excluirPersonal(personal.id)
                                 .then((value) {
                               setState(() {});
                             }),

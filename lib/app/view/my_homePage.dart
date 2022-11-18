@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:starting_training/app/view/components/botao.dart';
+import 'package:starting_training/app/view/components/botao_entrar.dart';
+import 'package:starting_training/app/view/components/criar_campo_input-login.dart';
+import 'package:starting_training/app/view/components/criar_campo_input.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -13,90 +17,77 @@ class _MyHomePageState extends State<MyHomePage> {
   String? CPF;
   String? senha;
   String? permissao;
+  final formeKey = GlobalKey<FormState>();
 
   definirRota(cpf, senha) {
     if (cpf == "000" && senha == "adm") {
-      Navigator.popAndPushNamed(context, "/admPage");
+      Navigator.pushNamed(context, "/admPage");
     } else if (cpf == "123" && senha == "personal") {
-      Navigator.popAndPushNamed(context, "/personalPage");
+      Navigator.pushNamed(context, "/personalPage");
     } else if (permissao == 'aluno') {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: const Color.fromARGB(255, 47, 47, 47),
-      ),
       body: Container(
-        padding: const EdgeInsets.only(
-          top: 60,
-          left: 40,
-          right: 40,
-        ),
-        child: ListView(
-          children: <Widget>[
-            const SizedBox(
-              width: 150,
-              height: 150,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: "CPF",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
+        child: Form(
+          key: formeKey,
+          child: ListView(
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2.5,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xfff45d27),
+                      Color(0xFFf5851f),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    //bottomRight: Radius.circular(100),
+                    bottomLeft: Radius.circular(100),
+                  ),
                 ),
               ),
-              onChanged: (text) {
-                CPF = text;
-              },
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.only(top: 62),
+                child: Column(
+                  children: [
+                    CampoTextoLogin(
+                        icone: const Icon(Icons.person),
+                        visibilidade: false,
+                        rotulo: 'CPF',
+                        tipo: TextInputType.number,
+                        vincularCampo: (value) => CPF = value,
+                        retornoValidador: 'Campo obrigatório'),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    CampoTextoLogin(
+                        icone: const Icon(Icons.key),
+                        visibilidade: true,
+                        rotulo: 'Senha',
+                        tipo: TextInputType.visiblePassword,
+                        vincularCampo: (value) => senha = value,
+                        retornoValidador: 'Campo obrigatório'),
+                    Spacer(),
+                    ButtonEntrar(
+                        rotulo: 'Login',
+                        icone: Icon(Icons.arrow_forward_ios_outlined),
+                        cor: Colors.amber,
+                        borda: StadiumBorder(),
+                        acao: () => definirRota(CPF, senha)),
+                  ],
                 ),
               ),
-              onChanged: (text) {
-                senha = text;
-              },
-            ),
-            Container(
-              height: 30,
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(50.0),
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.amber, shape: const StadiumBorder()),
-                child: const Text("Entrar"),
-                onPressed: () => definirRota(CPF, senha),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

@@ -54,7 +54,6 @@ class PersonalDAO {
     return linhasAfetadas > 0;
   }
 
-
   Future<bool> excluirPersonal(int id) async {
     try {
       const sql = 'DELETE FROM personal WHERE id = ?';
@@ -91,12 +90,25 @@ class PersonalDAO {
   }
 
   @override
-  Future<List<Map<String, Object?>>> listarPersonal() async {
+  Future<List<PersonalTreiner>> listarPersonal() async {
     const sql = 'SELECT * FROM personal';
     db = await Conexao.getConexao();
     List<Map<String, Object?>> resultado = (await db.rawQuery(sql));
     if (resultado.isEmpty) throw Exception('Sem registros');
-
-    return resultado;
+    List<PersonalTreiner> personais = resultado.map((resultado) {
+      return PersonalTreiner(
+          id: resultado['id'],
+          nome: resultado['nome'],
+          CPF: resultado['CPF'],
+          telefone: resultado['telefone'],
+          dataNascimento: resultado['dataNascimento'],
+          endereco: resultado['endereco'],
+          status: resultado['status'],
+          senha: resultado['senha'],
+          permissao: resultado['permissao'],
+          cref: resultado['cref'].toString(),
+          validadeCref: resultado['validadeCref']);
+    }).toList();
+    return personais;
   }
 }
