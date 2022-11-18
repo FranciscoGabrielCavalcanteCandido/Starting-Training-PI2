@@ -36,7 +36,7 @@ class TreinoDAO {
     } finally {}
   }
 
-  Future<Treino> consultarExercicio(int id) async {
+  Future<Treino> consultarTreino(int id) async {
     late Database db;
     try {
       const sql = "SELECT * FROM treino WHERE id=?";
@@ -56,7 +56,7 @@ class TreinoDAO {
   }
 
   @override
-  Future<List<Treino>> listarExerxixios() async {
+  Future<List<Treino>> listarTreinos() async {
     late Database db;
     try {
       const sql = 'SELECT * FROM exercicio';

@@ -60,7 +60,7 @@ class AdmPage extends StatelessWidget {
               child: ElevatedButton(
                 child: Text("Treino"),
                 onPressed: () =>
-                    Navigator.popAndPushNamed(context, "/tareaList"),
+                    Navigator.popAndPushNamed(context, "/listTreino"),
               ),
             ),
           ],

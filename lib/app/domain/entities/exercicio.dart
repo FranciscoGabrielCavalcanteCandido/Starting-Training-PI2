@@ -11,7 +11,7 @@ class Exercicio {
   Treino treino;
 
   Exercicio(
-      {required this.id,
+      {this.id,
       required this.nome,
       required this.peso,
       required this.serie,

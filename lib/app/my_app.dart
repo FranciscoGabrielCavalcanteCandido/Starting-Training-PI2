@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/treinoForm': (context) => TreinoForm(),
         '/personalPage': (context) => PersonalPage(),
         '/listAlunoPage': (context) => ListAlunoPage(),
+        '/listTreino': (context) => ListTreino()
       },
     );
   }

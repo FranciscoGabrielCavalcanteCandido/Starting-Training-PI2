@@ -49,8 +49,7 @@ class ExercicioDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método excluir');
-    } finally {
-    }
+    } finally {}
   }
 
   Future<Exercicio> consultarExercicio(int id) async {
@@ -72,8 +71,7 @@ class ExercicioDAO {
       return exercicio;
     } catch (e) {
       throw Exception('classe ExercicioDAO, método consultar');
-    } finally {
-    }
+    } finally {}
   }
 
   @override
@@ -98,7 +96,30 @@ class ExercicioDAO {
       return exercicios;
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método listar');
-    } finally {
-    }
+    } finally {}
+  }
+
+  Future<List<Exercicio>> listarExerxixiosPorTreino(id) async {
+    late Database db;
+    try {
+      const sql = 'SELECT * FROM exercicio WHERE treino_id=?';
+      db = await Conexao.getConexao();
+      List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
+      if (resultados.isEmpty) throw Exception('Sem registros');
+      List<Exercicio> exercicios = resultados.map((resultado) {
+        return Exercicio(
+            id: resultado['id'] as int,
+            nome: resultado['nome'].toString(),
+            peso: resultado['peso'] as double,
+            repeticao: resultado['repeticao'] as int,
+            serie: resultado['serie'] as int,
+            categoria: resultado['categoria'].toString(),
+            tipoExercicio: resultado['tipo_exercicio'].toString(),
+            treino: resultado['treino_id'] as Treino);
+      }).toList();
+      return exercicios;
+    } catch (e) {
+      throw Exception('classe ExercicioDAOSQLite, método listar');
+    } finally {}
   }
 }

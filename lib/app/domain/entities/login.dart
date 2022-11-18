@@ -6,7 +6,7 @@ class Login {
 
   Login(
       {required this.CPF,
-      required this.id,
+      this.id,
       required this.senha,
       required this.permissao});
 }
