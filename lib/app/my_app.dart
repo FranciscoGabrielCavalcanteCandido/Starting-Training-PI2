@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starting_training/app/view/admPage.dart';
 import 'package:starting_training/app/view/alunoView/listAlunoPage.dart';
 import 'package:starting_training/app/view/alunoView/alunoForm.dart';
+import 'package:starting_training/app/view/medidaView/medidaForm.dart';
 
 import 'package:starting_training/app/view/my_homePage.dart';
 import 'package:starting_training/app/view/personalView/listPersonalPage.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
         '/treinoForm': (context) => TreinoForm(),
         '/personalPage': (context) => PersonalPage(),
         '/listAlunoPage': (context) => ListAlunoPage(),
-        '/listTreino': (context) => ListTreino()
+        '/listTreino': (context) => ListTreino(),
+        '/medidaForm': (context) => MedidaForm()
       },
     );
   }

@@ -55,9 +55,7 @@ class MedidaDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe MedidaDAOSQLite, método excluir');
-    } finally {
-      
-    }
+    } finally {}
   }
 
   Future<Medida> consultarMedida(int id) async {
@@ -75,15 +73,13 @@ class MedidaDAO {
           braco: resultado['barco'] as double,
           quadril: resultado['quadril'] as double,
           perna: resultado['perna'] as double,
-          dataAvaliacao: resultado['data_avaliacao'] as DateTime,
+          dataAvaliacao: resultado['data_avaliacao'].toString(),
           imc: resultado['imc'] as double,
           aluno: resultado['aluno'] as Aluno);
       return medida;
     } catch (e) {
       throw Exception('classe MedidaDAO, método consultar');
-    } finally {
-     
-    }
+    } finally {}
   }
 
   Future<List<Medida>> listarMedidas() async {
@@ -102,15 +98,13 @@ class MedidaDAO {
             braco: resultado['barco'] as double,
             quadril: resultado['quadril'] as double,
             perna: resultado['perna'] as double,
-            dataAvaliacao: resultado['data_avaliacao'] as DateTime,
+            dataAvaliacao: resultado['data_avaliacao'].toString(),
             imc: resultado['imc'] as double,
             aluno: resultado['aluno_id'] as Aluno);
       }).toList();
       return medidas;
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método listar');
-    } finally {
-      
-    }
+    } finally {}
   }
 }

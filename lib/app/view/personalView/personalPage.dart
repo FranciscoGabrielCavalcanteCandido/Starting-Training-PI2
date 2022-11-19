@@ -60,6 +60,21 @@ class PersonalPage extends StatelessWidget {
                     context, "/generationRelatorioPage"),
               ),
             ),
+            Container(
+              height: 30,
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: const BoxDecoration(
+                color: Colors.amber,
+              ),
+              child: ElevatedButton(
+                child: const Text("Medida"),
+                onPressed: () =>
+                    Navigator.popAndPushNamed(context, "/medidaForm"),
+              ),
+            ),
           ],
         ),
       ),

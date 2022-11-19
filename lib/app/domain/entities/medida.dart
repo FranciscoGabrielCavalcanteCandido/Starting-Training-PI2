@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
 
 class Medida {
@@ -10,7 +8,7 @@ class Medida {
   final double braco;
   final double quadril;
   final double perna;
-  DateTime dataAvaliacao;
+  String dataAvaliacao;
   double imc;
   Aluno aluno;
 
