@@ -7,6 +7,7 @@ import 'package:starting_training/app/dao/alunoDAO.dart';
 import 'package:starting_training/app/dao/medidaDAO.dart';
 import 'package:starting_training/app/domain/entities/medida.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+import 'package:starting_training/app/view/components/botao.dart';
 import 'package:starting_training/app/view/components/criar_campo_input.dart';
 
 class MedidaForm extends StatefulWidget {
@@ -79,6 +80,7 @@ class _MedidaFormState extends State<MedidaForm> {
         child: Form(
           key: formKey,
           child: ListView(children: <Widget>[
+            dropdownMedida(),
             CampoTexto(
               rotulo: 'Altura',
               tipo: TextInputType.number,
@@ -135,7 +137,26 @@ class _MedidaFormState extends State<MedidaForm> {
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
-            dropdownMedida(),
+            Button(
+                icone: Icon(Icons.save),
+                rotulo: "Salvar",
+                cor: Colors.amber,
+                borda: StadiumBorder(),
+                acao: () {
+                  var validar = formKey.currentState?.validate();
+                  if (validar == true) {
+                    medidaDAO.salvarMedida(Medida(
+                        altura: altura!,
+                        peso: peso!,
+                        cintura: cintura!,
+                        braco: braco!,
+                        quadril: quadril!,
+                        perna: perna!,
+                        dataAvaliacao: dataAvaliacao!,
+                        imc: imc!,
+                        aluno: aluno!));
+                  }
+                })
           ]),
         ),
       ),

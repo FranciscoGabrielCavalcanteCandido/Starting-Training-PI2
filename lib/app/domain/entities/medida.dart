@@ -13,7 +13,7 @@ class Medida {
   Aluno aluno;
 
   Medida(
-      {required this.id,
+      {this.id,
       required this.altura,
       required this.peso,
       required this.cintura,
