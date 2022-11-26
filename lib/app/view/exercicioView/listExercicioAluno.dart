@@ -4,14 +4,14 @@ import 'package:starting_training/app/domain/entities/exercicio.dart';
 import '../../dao/exercicioDAO.dart';
 import '../../domain/entities/treino.dart';
 
-class ListaExercicio extends StatefulWidget {
-  const ListaExercicio({Key? key}) : super(key: key);
+class ListaExercicioAluno extends StatefulWidget {
+  const ListaExercicioAluno({Key? key}) : super(key: key);
 
   @override
-  State<ListaExercicio> createState() => _ListaExercicioState();
+  State<ListaExercicioAluno> createState() => _ListaExercicioAlunoState();
 }
 
-class _ListaExercicioState extends State<ListaExercicio> {
+class _ListaExercicioAlunoState extends State<ListaExercicioAluno> {
   ExercicioDAO exercicioDAO = ExercicioDAO();
   late Treino treino;
 
@@ -61,41 +61,13 @@ class _ListaExercicioState extends State<ListaExercicio> {
                           exercicio.nome,
                           style: const TextStyle(fontSize: 30),
                         ),
-                        subtitle: Text(
-                            '''Peso: ${exercicio.peso} Kg\nSérie: ${exercicio.serie}\nRepetições: ${exercicio.repeticao}
-                    '''),
-                        trailing: SizedBox(
-                          width: 100,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                          context, './formExercicio',
-                                          arguments: exercicio)
-                                      .then((value) {
-                                    setState(() {});
-                                  });
-                                },
-                                icon: const Icon(Icons.edit),
-                                color: Colors.blue,
-                              ),
-                              IconButton(
-                                onPressed: () => exercicioDAO
-                                    .excluirExercicio(exercicio.id as int)
-                                    .then(
-                                  (value) {
-                                    setState(() {});
-                                  },
-                                ),
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text('Peso: ${exercicio.peso} Kg'),
+                          Text('Série: ${exercicio.serie} X'),
+                          Text('Repetições: ${exercicio.repeticao}'),
+                        ],
                       )
                     ],
                   ),

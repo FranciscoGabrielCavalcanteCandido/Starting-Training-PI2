@@ -7,11 +7,11 @@ class AdmPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 47, 47, 47),
-        title: Text("Pagina Admnistrador"),
+        backgroundColor: const Color.fromARGB(255, 47, 47, 47),
+        title: const Text("Pagina Admnistrador"),
       ),
       body: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 200,
           left: 40,
           right: 40,
@@ -26,7 +26,7 @@ class AdmPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: ElevatedButton(
-                child: Text("Personal"),
+                child: const Text("Personal"),
                 onPressed: () =>
                     Navigator.pushNamed(context, "/listPersonalPage"),
               ),
@@ -42,9 +42,8 @@ class AdmPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: ElevatedButton(
-                child: Text("Aluno"),
-                onPressed: () => Navigator.popAndPushNamed(
-                    context, "/registrationAlunoPage"),
+                child: const Text("Aluno"),
+                onPressed: () => Navigator.pushNamed(context, "/listAlunoPage"),
               ),
             ),
             Container(
@@ -58,9 +57,8 @@ class AdmPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: ElevatedButton(
-                child: Text("Treino"),
-                onPressed: () =>
-                    Navigator.popAndPushNamed(context, "/listTreino"),
+                child: const Text("Treino"),
+                onPressed: () => Navigator.pushNamed(context, "/listTreino"),
               ),
             ),
           ],

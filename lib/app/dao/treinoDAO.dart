@@ -76,4 +76,25 @@ class TreinoDAO {
       throw Exception('classe TreinoDAOSQLite, método listar');
     } finally {}
   }
+
+  Future<List<Treino>> listarTreinoAluno(int id) async {
+    late Database db;
+    try {
+      const sql = 'SELECT * FROM exercicio WHERE aluno_id=?';
+      db = await Conexao.getConexao();
+      List<Map<String, Object?>> resultados = (await db.rawQuery(sql, [id]));
+      if (resultados.isEmpty) throw Exception('Sem registros');
+      List<Treino> treinos = resultados.map((resultado) {
+        return Treino(
+            id: resultado['id'] as int,
+            nome: resultado['nome'].toString(),
+            ordem: resultado['ordem'].toString(),
+            status: resultado['status'].toString(),
+            aluno: resultado['aluno_id'] as Aluno);
+      }).toList();
+      return treinos;
+    } catch (e) {
+      throw Exception('classe TreinoDAOSQLite, método listar');
+    } finally {}
+  }
 }

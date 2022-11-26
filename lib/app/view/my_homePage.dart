@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starting_training/app/domain/entities/login.dart';
 import 'package:starting_training/app/view/components/botao.dart';
 import 'package:starting_training/app/view/components/botao_entrar.dart';
 import 'package:starting_training/app/view/components/criar_campo_input-login.dart';
@@ -19,12 +20,18 @@ class _MyHomePageState extends State<MyHomePage> {
   String? permissao;
   final formeKey = GlobalKey<FormState>();
 
-  definirRota(cpf, senha) {
-    if (cpf == "000" && senha == "adm") {
+  definirRota(Login login) {
+    if (login.CPF == "000" && login.senha == "adm") {
       Navigator.pushNamed(context, "/admPage");
-    } else if (cpf == "123" && senha == "personal") {
-      Navigator.pushNamed(context, "/personalPage");
-    } else if (permissao == 'aluno') {}
+    } else if (login.CPF == "123" && login.senha == login.permissao) {
+      Navigator.pushNamed(context, "/personalPage",
+          arguments: Login(
+              CPF: login.CPF, senha: login.senha, permissao: login.permissao));
+    } else if (permissao == 'aluno') {
+      Navigator.pushNamed(context, '/alunoPage',
+          arguments: Login(
+              CPF: login.CPF, senha: login.senha, permissao: login.permissao));
+    }
   }
 
   @override
@@ -82,7 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         icone: Icon(Icons.arrow_forward_ios_outlined),
                         cor: Colors.amber,
                         borda: StadiumBorder(),
-                        acao: () => definirRota(CPF, senha)),
+                        acao: () => definirRota(Login(
+                            CPF: CPF!, senha: senha!, permissao: permissao!))),
                   ],
                 ),
               ),
