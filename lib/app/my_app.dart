@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         '/listTreino': (context) => const ListTreino(),
         '/medidaForm': (context) => const MedidaForm(),
         '/listTreinoAluno': (context) => const ListTreinoAluo(),
-        '/alunoPAge': (context) =>  AlunoPage(),
+        '/alunoPage': (context) => AlunoPage(),
         //'/listMedidas':(context) =>
       },
     );

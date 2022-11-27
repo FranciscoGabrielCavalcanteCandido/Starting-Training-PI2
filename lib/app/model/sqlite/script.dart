@@ -65,6 +65,6 @@ final criarBanco = [
       id INTEGER NOT NULL PRIMARY KEY,
       cpf TEXT NOT NULL,
       senha TEXT NOT NULL,
-      perissao TEXT NOT NULL
+      permissao TEXT NOT NULL
   ) '''
 ];

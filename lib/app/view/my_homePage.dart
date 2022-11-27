@@ -15,22 +15,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String? CPF;
-  String? senha;
-  String? permissao;
+  late String CPF;
+  late String senha;
+  String permissao = '';
   final formeKey = GlobalKey<FormState>();
 
   definirRota(Login login) {
     if (login.CPF == "000" && login.senha == "adm") {
       Navigator.pushNamed(context, "/admPage");
-    } else if (login.CPF == "123" && login.senha == login.permissao) {
-      Navigator.pushNamed(context, "/personalPage",
-          arguments: Login(
-              CPF: login.CPF, senha: login.senha, permissao: login.permissao));
-    } else if (permissao == 'aluno') {
-      Navigator.pushNamed(context, '/alunoPage',
-          arguments: Login(
-              CPF: login.CPF, senha: login.senha, permissao: login.permissao));
+    } else if (login.CPF == "123" && login.senha == 'adm') {
+      Navigator.pushNamed(
+        context,
+        "/personalPage",
+      );
+    } else if (login.CPF == '456' && login.senha == 'aluno') {
+      Navigator.pushNamed(
+        context,
+        "/alunoPage",
+      );
     }
   }
 
@@ -90,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         cor: Colors.amber,
                         borda: StadiumBorder(),
                         acao: () => definirRota(Login(
-                            CPF: CPF!, senha: senha!, permissao: permissao!))),
+                            CPF: CPF, senha: senha, permissao: permissao))),
                   ],
                 ),
               ),

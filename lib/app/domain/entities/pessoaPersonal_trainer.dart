@@ -7,7 +7,7 @@ class PersonalTreiner extends Pessoa {
   dynamic validadeCref;
 
   PersonalTreiner({
-    required id,
+    id,
     required nome,
     required CPF,
     required telefone,

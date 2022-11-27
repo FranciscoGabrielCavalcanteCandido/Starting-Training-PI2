@@ -7,6 +7,7 @@ import 'package:starting_training/app/dao/alunoDAO.dart';
 import 'package:starting_training/app/dao/medidaDAO.dart';
 import 'package:starting_training/app/domain/entities/medida.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 import 'package:starting_training/app/view/components/botao.dart';
 import 'package:starting_training/app/view/components/criar_campo_input.dart';
 
@@ -30,7 +31,7 @@ class _MedidaFormState extends State<MedidaForm> {
   double? perna;
   String? dataAvaliacao;
   double? imc;
-  Aluno? aluno;
+  late Aluno aluno;
   String nomeAluno = 'Selecione o Aluno';
 
   final formKey = GlobalKey<FormState>();
@@ -39,9 +40,10 @@ class _MedidaFormState extends State<MedidaForm> {
   Widget build(BuildContext context) {
     Widget dropdownMedida() {
       return FutureBuilder(
-        future: alunoDAO.listarAluno(),
-        builder: (context, AsyncSnapshot<List<Aluno>> dados) {
-          var alunos = dados.data;
+        future: alunoDAO.consultarAluno(aluno.id),
+        builder: (context, AsyncSnapshot<Aluno> dados) {
+          List<Aluno> alunos = dados.data as List<Aluno>;
+
           return SizedBox(
             width: 300,
             height: 100,
@@ -66,6 +68,9 @@ class _MedidaFormState extends State<MedidaForm> {
       );
     }
 
+    var argumento = ModalRoute.of(context)?.settings.arguments;
+    if (argumento != null) aluno = argumento as Aluno;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 47, 47, 47),
@@ -80,7 +85,7 @@ class _MedidaFormState extends State<MedidaForm> {
         child: Form(
           key: formKey,
           child: ListView(children: <Widget>[
-            dropdownMedida(),
+            //dropdownMedida(),
             CampoTexto(
               rotulo: 'Altura',
               tipo: TextInputType.number,

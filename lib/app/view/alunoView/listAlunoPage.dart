@@ -23,8 +23,7 @@ class _ListAlunoPage extends State<ListAlunoPage> {
           IconButton(
             icon: const Icon(Icons.person_add),
             onPressed: () =>
-                Navigator.pushNamed(context, '/registrationAlunoPage')
-                    .then((value) {
+                Navigator.pushNamed(context, '/alunoForm').then((value) {
               setState(() {});
             }),
           ),

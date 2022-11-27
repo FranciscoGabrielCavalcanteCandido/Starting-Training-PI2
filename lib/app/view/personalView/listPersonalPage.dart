@@ -25,7 +25,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
           IconButton(
               icon: const Icon(Icons.person_add),
               onPressed: () {
-                Navigator.pushNamed(context, '/PersonalForm').then((value) {
+                Navigator.pushNamed(context, '/personalForm').then((value) {
                   setState(() {});
                 });
               }),
