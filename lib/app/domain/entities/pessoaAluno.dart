@@ -9,7 +9,7 @@ class Aluno extends Pessoa {
   Aluno({
     id,
     required nome,
-    required CPF,
+    required cpf,
     required telefone,
     required dataNascimento,
     required endereco,
@@ -21,7 +21,7 @@ class Aluno extends Pessoa {
   }) : super(
             id: id,
             nome: nome,
-            CPF: CPF,
+            cpf: cpf,
             telefone: telefone,
             dataNascimento: dataNascimento,
             endereco: endereco,

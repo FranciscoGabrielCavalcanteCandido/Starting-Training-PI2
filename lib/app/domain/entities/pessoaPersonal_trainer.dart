@@ -9,7 +9,7 @@ class PersonalTreiner extends Pessoa {
   PersonalTreiner({
     id,
     required nome,
-    required CPF,
+    required cpf,
     required telefone,
     required dataNascimento,
     required endereco,
@@ -21,7 +21,7 @@ class PersonalTreiner extends Pessoa {
   }) : super(
             id: id,
             nome: nome,
-            CPF: CPF,
+            cpf: cpf,
             telefone: telefone,
             dataNascimento: dataNascimento,
             endereco: endereco,

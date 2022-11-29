@@ -12,7 +12,7 @@ class AlunoDAO {
         VALUES (?,?,?,?,?,?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(sql, [
       aluno.nome,
-      aluno.CPF,
+      aluno.cpf,
       aluno.telefone,
       aluno.dataNascimento,
       aluno.endereco,
@@ -30,7 +30,7 @@ class AlunoDAO {
     Database db = await Conexao.getConexao();
     var linhasAfetadas = await db.rawUpdate(sql, [
       aluno.nome,
-      aluno.CPF,
+      aluno.cpf,
       aluno.telefone,
       aluno.dataNascimento,
       aluno.endereco,
@@ -65,7 +65,7 @@ class AlunoDAO {
       Aluno aluno = Aluno(
           id: resultado['id'] as int,
           nome: resultado['nome'].toString(),
-          CPF: resultado['cpf'].toString(),
+          cpf: resultado['cpf'].toString(),
           telefone: resultado['telefone'].toString(),
           dataNascimento: resultado['dataNascimento'].toString(),
           endereco: resultado['endereco'].toString(),
@@ -92,7 +92,7 @@ class AlunoDAO {
         return Aluno(
             id: resultado['id'] as int,
             nome: resultado['nome'].toString(),
-            CPF: resultado['cpf'].toString(),
+            cpf: resultado['cpf'].toString(),
             telefone: resultado['telefone'].toString(),
             dataNascimento: resultado['dataNascimento'].toString(),
             endereco: resultado['endereco'].toString(),

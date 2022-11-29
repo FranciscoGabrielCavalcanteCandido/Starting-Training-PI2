@@ -18,7 +18,7 @@ class PersonalDAO {
         VALUES (?,?,?,?,?,?,?,?,?,?)''';
       linhasAfetadas = await db.rawInsert(sql, [
         personalTreiner.nome,
-        personalTreiner.CPF,
+        personalTreiner.cpf,
         personalTreiner.telefone,
         personalTreiner.dataNascimento,
         personalTreiner.endereco,
@@ -34,7 +34,7 @@ class PersonalDAO {
       db = await Conexao.getConexao();
       linhasAfetadas = await db.rawUpdate(sql, [
         personalTreiner.nome,
-        personalTreiner.CPF,
+        personalTreiner.cpf,
         personalTreiner.telefone,
         personalTreiner.dataNascimento,
         personalTreiner.endereco,
@@ -47,7 +47,7 @@ class PersonalDAO {
       ]);
     }
     loginDAO.salvarLogin(Login(
-        CPF: personalTreiner.CPF,
+        CPF: personalTreiner.cpf,
         id: personalTreiner.id,
         senha: personalTreiner.senha,
         permissao: personalTreiner.permissao));
@@ -74,7 +74,7 @@ class PersonalDAO {
       PersonalTreiner personalTreiner = PersonalTreiner(
           id: resultado['id'] as int,
           nome: resultado['nome'].toString(),
-          CPF: resultado['cpf'].toString(),
+          cpf: resultado['cpf'].toString(),
           telefone: resultado['telefone'].toString(),
           dataNascimento: resultado['dataNascimento'].toString(),
           endereco: resultado['endereco'].toString(),
@@ -99,7 +99,7 @@ class PersonalDAO {
       return PersonalTreiner(
           id: resultado['id'],
           nome: resultado['nome'],
-          CPF: resultado['CPF'],
+          cpf: resultado['CPF'],
           telefone: resultado['telefone'],
           dataNascimento: resultado['dataNascimento'],
           endereco: resultado['endereco'],

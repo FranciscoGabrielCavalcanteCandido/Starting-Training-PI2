@@ -134,7 +134,7 @@ class _PerssonalFormState extends State<PerssonalForm> {
                             PersonalTreiner(
                               id: id,
                               nome: nome!,
-                              CPF: CPF!,
+                              cpf: CPF!,
                               telefone: telefone!,
                               dataNascimento: dataNascimento!,
                               endereco: endereco!,

@@ -1,7 +1,7 @@
 class Pessoa {
   final dynamic id;
   final String nome;
-  final String CPF;
+  final String cpf;
   final String telefone;
   final String endereco;
   final String dataNascimento;
@@ -12,7 +12,7 @@ class Pessoa {
   Pessoa(
       {required this.id,
       required this.nome,
-      required this.CPF,
+      required this.cpf,
       required this.telefone,
       required this.dataNascimento,
       required this.endereco,
