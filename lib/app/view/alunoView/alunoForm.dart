@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:starting_training/app/dao/alunoDAO.dart';
+import 'package:starting_training/app/dao/personalDAO.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
+import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 
 class AlunoForm extends StatefulWidget {
   const AlunoForm({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class AlunoForm extends StatefulWidget {
 
 class _AlunoFormState extends State<AlunoForm> {
   AlunoDAO alunoDAO = AlunoDAO();
+  PersonalDAO personalDAO = PersonalDAO();
   Aluno? aluno;
   int? id;
   String? nome;
@@ -21,10 +24,42 @@ class _AlunoFormState extends State<AlunoForm> {
   String? status;
   String? academia;
   String? senha;
+  late PersonalTreiner personalTreiner;
+  String nomePersonal = 'Selecione o Personal';
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    Widget dropdownAluno() {
+      return FutureBuilder(
+          future: personalDAO.consultarPersonal(personalTreiner.id),
+          builder: (context, AsyncSnapshot<PersonalTreiner> dados) {
+            List<PersonalTreiner> personais =
+                dados.data as List<PersonalTreiner>;
+
+            return SizedBox(
+              width: 300,
+              height: 100,
+              child: DropdownButtonFormField<PersonalTreiner>(
+                isExpanded: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8))),
+                hint: Text(nomePersonal),
+                items: personais!.map<DropdownMenuItem<PersonalTreiner>>(
+                    (PersonalTreiner personal) {
+                  return DropdownMenuItem<PersonalTreiner>(
+                      value: personal, child: Text(personal.nome));
+                }).toList(),
+                onChanged: (aluno) {
+                  this.personalTreiner = personalTreiner;
+                  print(this.personalTreiner!.nome);
+                },
+              ),
+            );
+          });
+    }
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 47, 47, 47),

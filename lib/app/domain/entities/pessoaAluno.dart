@@ -1,4 +1,3 @@
-import 'package:starting_training/app/dao/personalDAO.dart';
 import 'package:starting_training/app/domain/entities/pessoa.dart';
 import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
 
