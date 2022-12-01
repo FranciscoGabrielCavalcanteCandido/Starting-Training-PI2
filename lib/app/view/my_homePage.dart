@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   definirRota(Login login) {
     if (login.CPF == "000" && login.senha == "adm") {
       Navigator.pushNamed(context, "/admPage");
-    } else if (login.CPF == "123" && login.senha == 'adm') {
+    } else if (login.CPF == "123" && login.senha == 'personal') {
       Navigator.pushNamed(
         context,
         "/personalPage",
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 32,
                     ),
                     CampoTextoLogin(
-                        icone: const Icon(Icons.key),
+                        icone: const Icon(Icons.vpn_key),
                         visibilidade: true,
                         rotulo: 'Senha',
                         tipo: TextInputType.visiblePassword,
