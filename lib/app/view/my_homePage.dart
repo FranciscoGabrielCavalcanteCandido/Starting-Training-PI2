@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starting_training/app/dao/loginDAO.dart';
 import 'package:starting_training/app/domain/entities/login.dart';
 import 'package:starting_training/app/view/components/botao.dart';
 import 'package:starting_training/app/view/components/botao_entrar.dart';
@@ -15,7 +16,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late String CPF;
+  late String cpf;
   late String senha;
   String permissao = '';
   final formeKey = GlobalKey<FormState>();
@@ -33,6 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
         context,
         "/alunoPage",
       );
+    }
+  }
+
+  defineRota(Login loginDigitado) {
+    if (loginDigitado.permissao == 'aluno') {
+      Navigator.pushNamed(context, "/alunoPage");
+    } else if (loginDigitado.permissao == 'personal') {
+      Navigator.pushNamed(context, "/personalPage");
+    } else if (loginDigitado.senha == 'adm') {
+      Navigator.pushNamed(context, "/admPage");
     }
   }
 
@@ -73,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         visibilidade: false,
                         rotulo: 'CPF',
                         tipo: TextInputType.number,
-                        vincularCampo: (value) => CPF = value,
+                        vincularCampo: (value) => cpf = value,
                         retornoValidador: 'Campo obrigatório'),
                     SizedBox(
                       height: 32,
@@ -91,8 +102,22 @@ class _MyHomePageState extends State<MyHomePage> {
                         icone: Icon(Icons.arrow_forward_ios_outlined),
                         cor: Colors.amber,
                         borda: StadiumBorder(),
-                        acao: () => definirRota(Login(
-                            CPF: CPF, senha: senha, permissao: permissao))),
+                        acao: () {
+                          if (cpf != '000') {
+                            var validaLogin = LoginDAO().verificaLogin(Login(
+                                CPF: cpf, senha: senha, permissao: permissao));
+
+                            if (validaLogin == true) {
+                              defineRota(Login(
+                                  CPF: cpf,
+                                  senha: senha,
+                                  permissao: permissao));
+                            }
+                          } else {
+                            defineRota(Login(
+                                CPF: cpf, senha: senha, permissao: permissao));
+                          }
+                        })
                   ],
                 ),
               ),

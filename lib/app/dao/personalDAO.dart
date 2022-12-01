@@ -74,7 +74,7 @@ class PersonalDAO {
       PersonalTreiner personalTreiner = PersonalTreiner(
           id: resultado['id'] as int,
           nome: resultado['nome'].toString(),
-          cpf: resultado['cpf'].toString(),
+          CPF: resultado['cpf'].toString(),
           telefone: resultado['telefone'].toString(),
           dataNascimento: resultado['dataNascimento'].toString(),
           endereco: resultado['endereco'].toString(),
@@ -99,7 +99,7 @@ class PersonalDAO {
       return PersonalTreiner(
           id: resultado['id'],
           nome: resultado['nome'],
-          cpf: resultado['CPF'],
+          CPF: resultado['CPF'],
           telefone: resultado['telefone'],
           dataNascimento: resultado['dataNascimento'],
           endereco: resultado['endereco'],

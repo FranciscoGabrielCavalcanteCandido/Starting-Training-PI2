@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:starting_training/app/dao/personalDAO.dart';
 import 'package:starting_training/app/domain/entities/login.dart';
 import '../model/sqlite/conexao.dart';
 
@@ -60,38 +61,21 @@ class LoginDAO {
     return resultado;
   }
 
-  Future<String> verificaCpf(String cpfDigitado) async {
-    db = await Conexao.getConexao();
-    var sqlCpf = 'SELECT cpf FROM login WHERE cpf=?';
-    var cpf = (await db.rawQuery(sqlCpf, [cpfDigitado]));
-    if (cpf.isEmpty) throw Exception('CPF inválido');
-    return cpf.toString();
-  }
-
-  Future<String> verificaSenha(String senhaDigitada) async {
-    db = await Conexao.getConexao();
-    var sqlSenha = 'SELECT senha FROM login WHERE senha=?';
-    var senha = (await db.rawQuery(sqlSenha, [
-      senhaDigitada,
-    ]));
-    if (senha.isEmpty) throw Exception('Senha inválida');
-    return senha.toString();
-  }
-
   Future<bool> verificaLogin(Login loginDigitado) async {
+    var valido = false;
     db = await Conexao.getConexao();
-    bool valido = false;
-    var sqlLogin = 'SELECT senha FROM login WHERE cpf=?';
-    var login = (await db.rawQuery(sqlLogin, [loginDigitado.CPF]));
-    if (!login.isEmpty) valido = true;
+    var sqlLogin = 'SELECT * FROM login WHERE cpf=?';
+    var resultado = (await db.rawQuery(sqlLogin, [loginDigitado.CPF])).first;
+
+    Login login = Login(
+        CPF: resultado['cpf'].toString(),
+        senha: resultado['senha'].toString(),
+        permissao: resultado['permissao'].toString());
+
+    if (loginDigitado.CPF == login.CPF && loginDigitado.senha == login.senha) {
+      valido == true;
+    }
 
     return valido;
-  }
-
-  Future<String> pegaPermissao(Login login) async {
-    db = await Conexao.getConexao();
-    var sql = 'SELECT permissao FROM login WHERE senha=?';
-    var permissao = (await db.rawQuery(sql, [login.CPF]));
-    return permissao.toString();
   }
 }
