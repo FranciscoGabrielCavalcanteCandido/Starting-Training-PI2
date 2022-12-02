@@ -24,12 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
   definirRota(Login login) {
     if (login.CPF == "000" && login.senha == "adm") {
       Navigator.pushNamed(context, "/admPage");
-    } else if (login.CPF == "123" && login.senha == 'personal') {
+    } else if (login.CPF == "09500996944" && login.senha == 'personal123') {
       Navigator.pushNamed(
         context,
         "/personalPage",
       );
-    } else if (login.CPF == '456' && login.senha == 'aluno') {
+    } else if (login.CPF == '09500969644' && login.senha == 'aluno123') {
       Navigator.pushNamed(
         context,
         "/alunoPage",
@@ -103,20 +103,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         cor: Colors.amber,
                         borda: StadiumBorder(),
                         acao: () {
-                          if (cpf != '000') {
-                            var validaLogin = LoginDAO().verificaLogin(Login(
-                                CPF: cpf, senha: senha, permissao: permissao));
+                          /*var validaLogin = LoginDAO().verificaLogin(Login(
+                              CPF: cpf, senha: senha, permissao: permissao));
 
-                            if (validaLogin == true) {
-                              defineRota(Login(
-                                  CPF: cpf,
-                                  senha: senha,
-                                  permissao: permissao));
-                            }
-                          } else {
-                            defineRota(Login(
-                                CPF: cpf, senha: senha, permissao: permissao));
-                          }
+                          print(validaLogin);*/
+
+                          definirRota(Login(
+                              CPF: cpf, senha: senha, permissao: permissao));
                         })
                   ],
                 ),

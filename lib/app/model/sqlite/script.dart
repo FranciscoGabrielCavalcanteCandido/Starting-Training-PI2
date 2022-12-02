@@ -4,7 +4,8 @@ final criarBanco = [
           ordem INT NOT NULL,
           status TEXT NOT NULL,
           nome TEXT NOT NULL,
-          FOREIGN KEY (aluno_id) REFERENCES aluno(id)
+          aluno_id INTEGER NOT NULL,
+          FOREIGN KEY(aluno_id) REFERENCES aluno(id)
       )''',
   '''
         CREATE TABLE personal(
@@ -31,8 +32,9 @@ final criarBanco = [
           status TEXT NOT NULL,
           senha TEXT NOT NULL,
           permissao TEXT NOT NULL,
-          frequencia INT,
-          FOREIGN KEY (personal_id) REFERENCES personal(id)
+          frequencia INT NOT NULL,
+          personal_id INTEGER NOT NULL,
+          FOREIGN KEY(personal_id) REFERENCES personal(id)
       )''',
   '''
         CREATE TABLE exercicio(
@@ -44,7 +46,7 @@ final criarBanco = [
           tipo_exercicio TEXT NOT NULL,
           repeticao TEXT NOT NULL,
           treino_id INTEGER NOT NULL,
-          FOREIGN KEY (treino_id) REFERENCES treino(id)
+          FOREIGN KEY(treino_id) REFERENCES treino(id)
       )''',
   '''
         CREATE TABLE medida(
@@ -58,7 +60,7 @@ final criarBanco = [
           data_Avaliacao TEXT NOT NULL,
           imc DOUBLE,
           aluno_id INTEGER NOT NULL,
-          FOREIGN KEY (aluno_id) REFERENCES aluno(id)
+          FOREIGN KEY(aluno_id) REFERENCES aluno(id)
         )''',
   ''' 
     CREATE TABLE login(

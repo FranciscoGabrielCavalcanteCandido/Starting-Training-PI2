@@ -15,37 +15,36 @@ class _PerssonalFormState extends State<PerssonalForm> {
   PersonalTreiner? personal;
   dynamic id;
   dynamic nome;
-  String? CPF;
-  String? telefone;
-  String? endereco;
-  String? dataNascimento;
-  String? status;
-  String? senha;
-  String permissao = 'personal';
-  String? cref;
-  String? validadeCref;
+  late String cpfPersonal;
+  late String telefone;
+  late String endereco;
+  late String dataNascimento;
+  late String status;
+  late String senha;
+  late String permissao = 'personal';
+  late String cref;
+  late String validadeCref;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     var argumento = ModalRoute.of(context)?.settings.arguments;
     if (argumento != null) {
-      Map<String, Object?> personal = argumento as Map<String, Object?>;
-      id = personal['id'] as int;
-      nome = personal['nome'] as String;
-      CPF = personal['cpf'] as String;
-      telefone = personal['telefone'] as String;
-      endereco = personal['endereco'] as String;
-      dataNascimento = personal['dataNascimento'] as String;
-      status = personal['status'] as String;
-      senha = personal['senha'] as String;
-      permissao = personal['permissao'] as String;
-      cref = personal['cref'] as String;
-      validadeCref = personal['validadeCref'] as String;
+      PersonalTreiner personal = argumento as PersonalTreiner;
+      id = personal.id;
+      nome = personal.nome;
+      cpfPersonal = personal.cpf;
+      telefone = personal.telefone;
+      endereco = personal.endereco;
+      dataNascimento = personal.dataNascimento;
+      status = personal.status;
+      senha = personal.senha;
+      permissao = personal.permissao;
+      cref = personal.cref;
+      validadeCref = personal.validadeCref;
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
         title: const Text('Cadastro Personal'),
         centerTitle: true,
       ),
@@ -63,7 +62,7 @@ class _PerssonalFormState extends State<PerssonalForm> {
             CampoTexto(
               rotulo: 'CPF',
               tipo: TextInputType.text,
-              vincularCampo: (value) => CPF = value,
+              vincularCampo: (value) => cpfPersonal = value,
               retornoValidador: 'Campo obrigatório',
               visibilidade: false,
             ),
@@ -111,7 +110,7 @@ class _PerssonalFormState extends State<PerssonalForm> {
             ),
             CampoTexto(
               rotulo: 'Validade Cref',
-              tipo: TextInputType.text,
+              tipo: TextInputType.datetime,
               vincularCampo: (value) => validadeCref = value,
               retornoValidador: 'Campo obrigatório',
               visibilidade: false,
@@ -124,7 +123,7 @@ class _PerssonalFormState extends State<PerssonalForm> {
               child: Button(
                   icone: Icon(Icons.add),
                   rotulo: 'Salvar',
-                  cor: Colors.amber,
+                  cor: Colors.deepOrange,
                   borda: StadiumBorder(),
                   acao: () {
                     var validar = formKey.currentState?.validate();
@@ -133,15 +132,15 @@ class _PerssonalFormState extends State<PerssonalForm> {
                           .salvarPersonal(
                             PersonalTreiner(
                               id: id,
-                              nome: nome!,
-                              CPF: CPF!,
-                              telefone: telefone!,
-                              dataNascimento: dataNascimento!,
-                              endereco: endereco!,
-                              status: status!,
+                              nome: nome,
+                              cpf: cpfPersonal,
+                              telefone: telefone,
+                              dataNascimento: dataNascimento,
+                              endereco: endereco,
+                              status: status,
                               validadeCref: validadeCref.toString(),
-                              senha: senha!,
-                              cref: cref!,
+                              senha: senha,
+                              cref: cref,
                               permissao: permissao,
                             ),
                           )

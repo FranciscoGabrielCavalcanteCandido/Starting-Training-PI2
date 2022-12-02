@@ -3,6 +3,7 @@ import 'package:starting_training/app/dao/alunoDAO.dart';
 import 'package:starting_training/app/dao/personalDAO.dart';
 import 'package:starting_training/app/domain/entities/pessoaAluno.dart';
 import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dart';
+import 'package:starting_training/app/view/components/criar_campo_input.dart';
 
 class AlunoForm extends StatefulWidget {
   const AlunoForm({Key? key}) : super(key: key);
@@ -14,26 +15,27 @@ class AlunoForm extends StatefulWidget {
 class _AlunoFormState extends State<AlunoForm> {
   AlunoDAO alunoDAO = AlunoDAO();
   PersonalDAO personalDAO = PersonalDAO();
-  Aluno? aluno;
-  int? id;
-  String? nome;
-  String? CPF;
-  String? telefone;
-  String? endereco;
-  String? dataNascimento;
-  String? status;
-  String? academia;
-  String? senha;
-  late PersonalTreiner personalTreiner;
+  late Aluno aluno;
+  dynamic id;
+  late String nome;
+  late String cpfAluno;
+  late String telefone;
+  late String endereco;
+  late String dataNascimento;
+  late String status;
+  late String academia;
+  late String senha;
+  PersonalTreiner? personalTreiner;
+  String permissao = 'aluno';
   String nomePersonal = 'Selecione o Personal';
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    Widget dropdownAluno() {
+    Widget dropdownPersonal() {
       return FutureBuilder(
-          future: personalDAO.consultarPersonal(personalTreiner.id),
-          builder: (context, AsyncSnapshot<PersonalTreiner> dados) {
+          future: personalDAO.listarPersonal(),
+          builder: (context, AsyncSnapshot<List<PersonalTreiner>> dados) {
             List<PersonalTreiner> personais =
                 dados.data as List<PersonalTreiner>;
 
@@ -51,9 +53,8 @@ class _AlunoFormState extends State<AlunoForm> {
                   return DropdownMenuItem<PersonalTreiner>(
                       value: personal, child: Text(personal.nome));
                 }).toList(),
-                onChanged: (aluno) {
-                  this.personalTreiner = personalTreiner;
-                  print(this.personalTreiner!.nome);
+                onChanged: (personal) {
+                  this.personalTreiner = personal;
                 },
               ),
             );
@@ -75,58 +76,56 @@ class _AlunoFormState extends State<AlunoForm> {
             key: formKey,
             child: ListView(
               children: <Widget>[
-                TextField(
-                  onChanged: (nomeDigitado) {
-                    nome = nomeDigitado;
-                  },
-                  decoration: InputDecoration(label: Text('Nome')),
+                CampoTexto(
+                  rotulo: 'Nome',
+                  tipo: TextInputType.text,
+                  vincularCampo: (value) => nome = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (cpfDigitado) {
-                    CPF = cpfDigitado;
-                  },
-                  decoration: InputDecoration(label: Text('CPF')),
+                CampoTexto(
+                  rotulo: 'CPF',
+                  tipo: TextInputType.text,
+                  vincularCampo: (value) => cpfAluno = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (telefoneDigitado) {
-                    telefone = telefoneDigitado;
-                  },
-                  decoration: InputDecoration(label: Text('Telefone')),
+                CampoTexto(
+                  rotulo: 'Data de nascimento',
+                  tipo: TextInputType.datetime,
+                  vincularCampo: (value) => dataNascimento = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  onChanged: (enderecoDigitado) {
-                    endereco = enderecoDigitado;
-                  },
-                  decoration: InputDecoration(label: Text('Endereço')),
+                CampoTexto(
+                  rotulo: 'Telefone',
+                  tipo: TextInputType.number,
+                  vincularCampo: (value) => telefone = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  onChanged: (academiaDigitada) {
-                    academia = academiaDigitada;
-                  },
-                  decoration: InputDecoration(label: Text('Academia')),
+                CampoTexto(
+                  rotulo: 'Endereço',
+                  tipo: TextInputType.text,
+                  vincularCampo: (value) => endereco = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (dataNascimentoDigitado) {
-                    dataNascimento = dataNascimentoDigitado;
-                  },
-                  decoration:
-                      InputDecoration(label: Text('Data de Nascimento')),
+                CampoTexto(
+                  rotulo: 'Status',
+                  tipo: TextInputType.text,
+                  vincularCampo: (value) => status = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  onChanged: (senhaDigitada) {
-                    senha = senhaDigitada;
-                  },
-                  decoration: InputDecoration(label: Text('Senha')),
+                CampoTexto(
+                  rotulo: 'Senha',
+                  tipo: TextInputType.text,
+                  vincularCampo: (value) => senha = value,
+                  retornoValidador: 'Campo obrigatório',
+                  visibilidade: false,
                 ),
-                TextField(
-                  onChanged: (statusDigitado) {
-                    status = statusDigitado;
-                  },
-                  decoration: InputDecoration(label: Text('Status')),
-                ),
+                dropdownPersonal(),
                 Container(
                   padding: EdgeInsets.only(
                     top: 30,
@@ -135,7 +134,19 @@ class _AlunoFormState extends State<AlunoForm> {
                   child: ElevatedButton(
                     child: Text('Salvar Aluno'),
                     onPressed: () {
-                      //alunoDAO.salvarAluno()
+                      alunoDAO
+                          .salvarAluno(Aluno(
+                              nome: nome,
+                              cpf: cpfAluno,
+                              telefone: telefone,
+                              dataNascimento: dataNascimento,
+                              endereco: endereco,
+                              status: status,
+                              senha: senha,
+                              permissao: permissao,
+                              frequencia: 0,
+                              personal: personalTreiner!))
+                          .then((value) => Navigator.pop(context));
                     },
                   ),
                 )

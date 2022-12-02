@@ -9,10 +9,10 @@ class TreinoDAO {
     Treino treino,
   ) async {
     Database db = await Conexao.getConexao();
-    const sql = '''INSERT INTO treino (ordem,status,nome) 
+    const sql = '''INSERT INTO treino (ordem,status,nome, aluno_id) 
         VALUES (?,?,?)''';
-    var linhasAfetadas =
-        await db.rawInsert(sql, [treino.ordem, treino.status, treino.nome]);
+    var linhasAfetadas = await db.rawInsert(
+        sql, [treino.ordem, treino.status, treino.nome, treino.aluno.id]);
     return linhasAfetadas > 0;
   }
 

@@ -19,21 +19,25 @@ class CampoTexto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      child: TextFormField(
-        keyboardType: tipo,
-        onChanged: vincularCampo,
-        decoration: InputDecoration(
-            label: Text(rotulo),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
-        initialValue: valorInicial ??= '',
-        obscureText: visibilidade,
-        validator: (String? value) {
-          if (value == null || value.isEmpty) {
-            return retornoValidador;
-          }
-        },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 300,
+        child: TextFormField(
+          keyboardType: tipo,
+          onChanged: vincularCampo,
+          decoration: InputDecoration(
+              label: Text(rotulo),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+          initialValue: valorInicial ??= '',
+          obscureText: visibilidade,
+          validator: (String? value) {
+            if (value == null || value.isEmpty) {
+              return retornoValidador;
+            }
+          },
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class MedidaDAO {
       medida.perna,
       medida.dataAvaliacao,
       medida.imc,
-      medida.aluno
+      medida.aluno.id
     ]);
     return linhasAfetadas > 0;
   }

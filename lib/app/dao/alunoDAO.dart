@@ -8,8 +8,8 @@ class AlunoDAO {
     Database db = await Conexao.getConexao();
     const sql =
         '''INSERT INTO aluno (nome, cpf, telefone, dataNascimento, endereco,
-         status, senha, permissao, frequencia) 
-        VALUES (?,?,?,?,?,?,?,?,?)''';
+         status, senha, permissao, frequencia, personal_id) 
+        VALUES (?,?,?,?,?,?,?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(sql, [
       aluno.nome,
       aluno.cpf,
@@ -20,7 +20,9 @@ class AlunoDAO {
       aluno.senha,
       aluno.permissao,
       aluno.frequencia,
+      aluno.personal.id
     ]);
+    print(linhasAfetadas > 0);
     return linhasAfetadas > 0;
   }
 
@@ -81,14 +83,14 @@ class AlunoDAO {
   }
 
   @override
-  Future<List<Aluno>> listarAluno() async {
+  Future<List<Map<String, Object?>>> listarAluno() async {
     late Database db;
     try {
       const sql = 'SELECT * FROM aluno';
       db = await Conexao.getConexao();
       List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
       if (resultados.isEmpty) throw Exception('Sem registros');
-      List<Aluno> alunos = resultados.map((resultado) {
+      /*List<Aluno> alunos = resultados.map((resultado) {
         return Aluno(
             id: resultado['id'] as int,
             nome: resultado['nome'].toString(),
@@ -101,8 +103,8 @@ class AlunoDAO {
             permissao: resultado['permissao'].toString(),
             senha: resultado['senha'].toString(),
             personal: resultado['personal_id'] as PersonalTreiner);
-      }).toList();
-      return alunos;
+      }).toList();*/
+      return resultados;
     } catch (e) {
       throw Exception(e);
     } finally {}

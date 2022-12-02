@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -22,15 +21,18 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton.icon(
-        onPressed: acao,
-        icon: icone,
-        label: Text(
-          rotulo,
-          style: const TextStyle(fontSize: 25),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: ElevatedButton.icon(
+          onPressed: acao,
+          icon: icone,
+          label: Text(
+            rotulo,
+            style: const TextStyle(fontSize: 25),
+          ),
+          style: ElevatedButton.styleFrom(primary: cor, shape: borda),
         ),
-        style: ElevatedButton.styleFrom(primary: cor, shape: borda),
       ),
     );
   }

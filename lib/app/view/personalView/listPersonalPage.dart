@@ -42,7 +42,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                 var personal = lista[contador];
                 return ListTile(
                   title: Text(personal.nome),
-                  subtitle: Text(personal.id),
+                  subtitle: Text(personal.id.toString()),
                   trailing: SizedBox(
                       width: 100,
                       child: Row(
@@ -50,7 +50,7 @@ class _ListPersonalPageState extends State<ListPersonalPage> {
                           IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/PersonalForm',
+                              Navigator.pushNamed(context, '/personalForm',
                                       arguments: personal)
                                   .then((value) {
                                 setState(() {});
