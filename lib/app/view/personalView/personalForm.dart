@@ -48,107 +48,114 @@ class _PerssonalFormState extends State<PerssonalForm> {
         title: const Text('Cadastro Personal'),
         centerTitle: true,
       ),
-      body: Form(
-        key: formKey,
-        child: ListView(
-          children: <Widget>[
-            CampoTexto(
-              rotulo: 'Nome',
-              tipo: TextInputType.text,
-              vincularCampo: (value) => nome = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'CPF',
-              tipo: TextInputType.text,
-              vincularCampo: (value) => cpfPersonal = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Data de nascimento',
-              tipo: TextInputType.datetime,
-              vincularCampo: (value) => dataNascimento = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Telefone',
-              tipo: TextInputType.number,
-              vincularCampo: (value) => telefone = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Endereço',
-              tipo: TextInputType.text,
-              vincularCampo: (value) => endereco = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Status',
-              tipo: TextInputType.text,
-              vincularCampo: (value) => status = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Senha',
-              tipo: TextInputType.text,
-              vincularCampo: (value) => senha = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Cref',
-              tipo: TextInputType.number,
-              vincularCampo: (value) => cref = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            CampoTexto(
-              rotulo: 'Validade Cref',
-              tipo: TextInputType.datetime,
-              vincularCampo: (value) => validadeCref = value,
-              retornoValidador: 'Campo obrigatório',
-              visibilidade: false,
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                top: 30,
-                bottom: 20,
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 60,
+          left: 40,
+          right: 40,
+        ),
+        child: Form(
+          key: formKey,
+          child: ListView(
+            children: <Widget>[
+              CampoTexto(
+                rotulo: 'Nome',
+                tipo: TextInputType.text,
+                vincularCampo: (value) => nome = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
               ),
-              child: Button(
-                  icone: Icon(Icons.add),
-                  rotulo: 'Salvar',
-                  cor: Colors.deepOrange,
-                  borda: StadiumBorder(),
-                  acao: () {
-                    var validar = formKey.currentState?.validate();
-                    if (validar == true) {
-                      personalDAO
-                          .salvarPersonal(
-                            PersonalTreiner(
-                              id: id,
-                              nome: nome,
-                              cpf: cpfPersonal,
-                              telefone: telefone,
-                              dataNascimento: dataNascimento,
-                              endereco: endereco,
-                              status: status,
-                              validadeCref: validadeCref.toString(),
-                              senha: senha,
-                              cref: cref,
-                              permissao: permissao,
-                            ),
-                          )
-                          .then((value) => Navigator.pop(context));
-                    }
-                  }),
-            )
-          ],
+              CampoTexto(
+                rotulo: 'CPF',
+                tipo: TextInputType.text,
+                vincularCampo: (value) => cpfPersonal = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Data de nascimento',
+                tipo: TextInputType.datetime,
+                vincularCampo: (value) => dataNascimento = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Telefone',
+                tipo: TextInputType.number,
+                vincularCampo: (value) => telefone = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Endereço',
+                tipo: TextInputType.text,
+                vincularCampo: (value) => endereco = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Status',
+                tipo: TextInputType.text,
+                vincularCampo: (value) => status = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Senha',
+                tipo: TextInputType.text,
+                vincularCampo: (value) => senha = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Cref',
+                tipo: TextInputType.number,
+                vincularCampo: (value) => cref = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              CampoTexto(
+                rotulo: 'Validade Cref',
+                tipo: TextInputType.datetime,
+                vincularCampo: (value) => validadeCref = value,
+                retornoValidador: 'Campo obrigatório',
+                visibilidade: false,
+              ),
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 30,
+                  bottom: 20,
+                ),
+                child: Button(
+                    icone: Icon(Icons.add),
+                    rotulo: 'Salvar',
+                    cor: Colors.deepOrange,
+                    borda: StadiumBorder(),
+                    acao: () {
+                      var validar = formKey.currentState?.validate();
+                      if (validar == true) {
+                        personalDAO
+                            .salvarPersonal(
+                              PersonalTreiner(
+                                id: id,
+                                nome: nome,
+                                cpf: cpfPersonal,
+                                telefone: telefone,
+                                dataNascimento: dataNascimento,
+                                endereco: endereco,
+                                status: status,
+                                validadeCref: validadeCref.toString(),
+                                senha: senha,
+                                cref: cref,
+                                permissao: permissao,
+                              ),
+                            )
+                            .then((value) => Navigator.pop(context));
+                      }
+                    }),
+              )
+            ],
+          ),
         ),
       ),
     );

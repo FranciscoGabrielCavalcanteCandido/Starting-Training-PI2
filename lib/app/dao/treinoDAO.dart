@@ -10,7 +10,7 @@ class TreinoDAO {
   ) async {
     Database db = await Conexao.getConexao();
     const sql = '''INSERT INTO treino (ordem,status,nome, aluno_id) 
-        VALUES (?,?,?)''';
+        VALUES (?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(
         sql, [treino.ordem, treino.status, treino.nome, treino.aluno.id]);
     return linhasAfetadas > 0;
@@ -59,7 +59,7 @@ class TreinoDAO {
   Future<List<Treino>> listarTreinos() async {
     late Database db;
     try {
-      const sql = 'SELECT * FROM exercicio';
+      const sql = 'SELECT * FROM treino';
       db = await Conexao.getConexao();
       List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
       if (resultados.isEmpty) throw Exception('Sem registros');
@@ -80,7 +80,7 @@ class TreinoDAO {
   Future<List<Treino>> listarTreinoAluno(int id) async {
     late Database db;
     try {
-      const sql = 'SELECT * FROM exercicio WHERE aluno_id=?';
+      const sql = 'SELECT * FROM treino WHERE aluno_id=?';
       db = await Conexao.getConexao();
       List<Map<String, Object?>> resultados = (await db.rawQuery(sql, [id]));
       if (resultados.isEmpty) throw Exception('Sem registros');

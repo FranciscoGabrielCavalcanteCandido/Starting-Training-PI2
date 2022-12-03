@@ -32,7 +32,7 @@ class _ListAlunoPage extends State<ListAlunoPage> {
       ),
       body: FutureBuilder(
         future: alunoDAO.listarAluno(),
-        builder: (context, AsyncSnapshot<List<Map<String, Object?>>> snapshot) {
+        builder: (context, AsyncSnapshot<List<Aluno>> snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
           var lista = snapshot.data!;
           return ListView.builder(
@@ -48,10 +48,10 @@ class _ListAlunoPage extends State<ListAlunoPage> {
                       children: [
                         ListTile(
                           title: Text(
-                            aluno['nome'].toString(),
+                            aluno.nome,
                             style: TextStyle(fontSize: 25),
                           ),
-                          subtitle: Text(aluno['status'].toString()),
+                          subtitle: Text(aluno.status),
                           trailing: SizedBox(
                             width: 100,
                             child: Row(
@@ -73,8 +73,8 @@ class _ListAlunoPage extends State<ListAlunoPage> {
                                 cor: Colors.amber,
                                 borda: StadiumBorder(),
                                 acao: () {
-                                  Navigator.popAndPushNamed(
-                                      context, "/medidaForm");
+                                  Navigator.pushNamed(context, "/listMedidas",
+                                      arguments: aluno);
                                 }),
                             Button(
                                 icone: Icon(Icons.list),
@@ -82,7 +82,8 @@ class _ListAlunoPage extends State<ListAlunoPage> {
                                 cor: Colors.amber,
                                 borda: StadiumBorder(),
                                 acao: () {
-                                  Navigator.pushNamed(context, "/listTreino");
+                                  Navigator.pushNamed(context, "/listTreino",
+                                      arguments: aluno);
                                 }),
                           ],
                         )

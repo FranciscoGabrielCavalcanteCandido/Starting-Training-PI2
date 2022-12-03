@@ -21,17 +21,17 @@ class MedidaForm extends StatefulWidget {
 class _MedidaFormState extends State<MedidaForm> {
   MedidaDAO medidaDAO = MedidaDAO();
   AlunoDAO alunoDAO = AlunoDAO();
-  Medida? medida;
-  int? id;
-  double? altura;
-  double? peso;
-  double? cintura;
-  double? braco;
-  double? quadril;
-  double? perna;
-  String? dataAvaliacao;
-  double? imc;
-  late Aluno aluno;
+  late Medida medida;
+  late int id;
+  double altura = 0.0;
+  double peso = 0.0;
+  late double cintura = 0.0;
+  late double braco = 0.0;
+  late double quadril = 0.0;
+  late double perna = 0.0;
+  late String dataAvaliacao = '';
+  late double imc = 0.0;
+  Aluno? aluno;
   String nomeAluno = 'Selecione o Aluno';
 
   final formKey = GlobalKey<FormState>();
@@ -40,10 +40,9 @@ class _MedidaFormState extends State<MedidaForm> {
   Widget build(BuildContext context) {
     Widget dropdownMedida() {
       return FutureBuilder(
-        future: alunoDAO.consultarAluno(aluno.id),
-        builder: (context, AsyncSnapshot<Aluno> dados) {
+        future: alunoDAO.listarAluno(),
+        builder: (context, AsyncSnapshot<List<Aluno>> dados) {
           List<Aluno> alunos = dados.data as List<Aluno>;
-
           return SizedBox(
             width: 300,
             height: 100,
@@ -57,7 +56,7 @@ class _MedidaFormState extends State<MedidaForm> {
                 return DropdownMenuItem<Aluno>(
                     value: aluno, child: Text(aluno.nome));
               }).toList(),
-              onChanged: (treino) {
+              onChanged: (aluno) {
                 ///nomeTreino = treino!.nome;
                 this.aluno = aluno;
                 print(this.aluno!.nome);
@@ -85,52 +84,52 @@ class _MedidaFormState extends State<MedidaForm> {
         child: Form(
           key: formKey,
           child: ListView(children: <Widget>[
-            //dropdownMedida(),
+            dropdownMedida(),
             CampoTexto(
               rotulo: 'Altura',
               tipo: TextInputType.number,
-              vincularCampo: (value) => altura = value as double,
+              vincularCampo: (value) => altura = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Peso',
               tipo: TextInputType.number,
-              vincularCampo: (value) => peso = value as double,
+              vincularCampo: (value) => peso = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Cintura',
               tipo: TextInputType.number,
-              vincularCampo: (value) => cintura = value as double,
+              vincularCampo: (value) => cintura = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Braço',
               tipo: TextInputType.number,
-              vincularCampo: (value) => braco = value as double,
+              vincularCampo: (value) => braco = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Quadril',
               tipo: TextInputType.number,
-              vincularCampo: (value) => quadril = value as double,
+              vincularCampo: (value) => quadril = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Perna',
               tipo: TextInputType.number,
-              vincularCampo: (value) => perna = value as double,
+              vincularCampo: (value) => perna = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
             CampoTexto(
               rotulo: 'Data da Avaliação',
-              tipo: TextInputType.text,
+              tipo: TextInputType.datetime,
               vincularCampo: (value) => dataAvaliacao = value,
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
@@ -138,7 +137,7 @@ class _MedidaFormState extends State<MedidaForm> {
             CampoTexto(
               rotulo: 'IMC',
               tipo: TextInputType.number,
-              vincularCampo: (value) => imc = value as double,
+              vincularCampo: (value) => imc = double.parse(value),
               retornoValidador: 'Campo Obrigatório',
               visibilidade: false,
             ),
@@ -150,16 +149,18 @@ class _MedidaFormState extends State<MedidaForm> {
                 acao: () {
                   var validar = formKey.currentState?.validate();
                   if (validar == true) {
-                    medidaDAO.salvarMedida(Medida(
-                        altura: altura!,
-                        peso: peso!,
-                        cintura: cintura!,
-                        braco: braco!,
-                        quadril: quadril!,
-                        perna: perna!,
-                        dataAvaliacao: dataAvaliacao!,
-                        imc: imc!,
-                        aluno: aluno!));
+                    medidaDAO
+                        .salvarMedida(Medida(
+                            altura: altura,
+                            peso: peso,
+                            cintura: cintura,
+                            braco: braco,
+                            quadril: quadril,
+                            perna: perna,
+                            dataAvaliacao: dataAvaliacao,
+                            imc: imc,
+                            aluno: aluno!))
+                        .then((value) => Navigator.pop(context));
                   }
                 })
           ]),

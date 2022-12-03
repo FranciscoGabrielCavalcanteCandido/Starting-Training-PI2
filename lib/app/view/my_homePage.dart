@@ -72,6 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     bottomLeft: Radius.circular(100),
                   ),
                 ),
+                child: SizedBox(
+                  child: Image.asset('assets/StartLogo.png'),
+                ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height / 2,
@@ -86,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         tipo: TextInputType.number,
                         vincularCampo: (value) => cpf = value,
                         retornoValidador: 'Campo obrigatório'),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     CampoTextoLogin(

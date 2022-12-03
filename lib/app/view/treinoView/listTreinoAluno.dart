@@ -14,26 +14,22 @@ class ListTreinoAluo extends StatefulWidget {
 class _ListTreinoAluoState extends State<ListTreinoAluo> {
   TreinoDAO treinoDAO = TreinoDAO();
   late Aluno aluno;
+  late Treino treino;
 
   @override
   Widget build(BuildContext context) {
     var argumento = ModalRoute.of(context)?.settings.arguments;
     if (argumento == null) {
-      aluno = argumento as Aluno;
+      treino = argumento as Treino;
     }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista Treino'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () => Navigator.pushNamed(context, '/treinoForm'),
-          )
-        ],
+        centerTitle: true,
       ),
       body: FutureBuilder(
-        future: treinoDAO.listarTreinoAluno(aluno.id),
+        future: treinoDAO.listarTreinos(),
         builder: (context, AsyncSnapshot<List<Treino>> snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
           var lista = snapshot.data!;
@@ -56,6 +52,22 @@ class _ListTreinoAluoState extends State<ListTreinoAluo> {
                     ),
                     title: Text(treino.nome),
                     subtitle: Text(treino.status),
+                    trailing: SizedBox(
+                      width: 145,
+                      child: Row(
+                        children: [
+                          IconButton(
+                              icon:
+                                  const Icon(Icons.arrow_forward_ios_outlined),
+                              onPressed: () => Navigator.pushNamed(
+                                          context, './listExercicioAluno',
+                                          arguments: treino)
+                                      .then((value) {
+                                    setState(() {});
+                                  })),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               );

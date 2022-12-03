@@ -3,6 +3,8 @@ import 'package:starting_training/app/view/admPage.dart';
 import 'package:starting_training/app/view/alunoView/alunoPage.dart';
 import 'package:starting_training/app/view/alunoView/listAlunoPage.dart';
 import 'package:starting_training/app/view/alunoView/alunoForm.dart';
+import 'package:starting_training/app/view/exercicioView/listExercicioAluno.dart';
+import 'package:starting_training/app/view/medidaView/listMedidas.dart';
 import 'package:starting_training/app/view/medidaView/medidaForm.dart';
 
 import 'package:starting_training/app/view/my_homePage.dart';
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         '/medidaForm': (context) => const MedidaForm(),
         '/listTreinoAluno': (context) => const ListTreinoAluo(),
         '/alunoPage': (context) => AlunoPage(),
+        '/listMedidas': (context) => ListMedidas(),
+        'listExercicioAluno':(context) => ListaExercicioAluno()
         //'/listMedidas':(context) =>
       },
     );

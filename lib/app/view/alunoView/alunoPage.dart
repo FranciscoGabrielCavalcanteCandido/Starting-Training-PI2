@@ -53,10 +53,10 @@ class _AlunoPageState extends State<AlunoPage> {
                 color: Colors.amber,
               ),
               child: ElevatedButton(
-                child: const Text("Relatórios"),
-                onPressed: () =>
-                    Navigator.popAndPushNamed(context, "/relatoriosPage"),
-              ),
+                  child: const Text("Relatórios"),
+                  onPressed: () {
+                    // Navigator.popAndPushNamed(context, "/relatoriosPage"),
+                  }),
             ),
           ],
         ),

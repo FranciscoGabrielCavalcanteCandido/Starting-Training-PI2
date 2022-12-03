@@ -12,7 +12,7 @@ class MedidaDAO {
   ) async {
     Database db = await Conexao.getConexao();
     const sql =
-        '''INSERT INTO exercicio (altura, pesoKg, cintura, braco, quadril, perna, data_avaliacao, imc, aluno_id) 
+        '''INSERT INTO medida (altura, pesoKg, cintura, braco, quadril, perna, data_avaliacao, imc, aluno_id) 
         VALUES (?,?,?,?,?,?,?,?,?)''';
     var linhasAfetadas = await db.rawInsert(sql, [
       medida.altura,
@@ -30,7 +30,7 @@ class MedidaDAO {
 
   Future<bool> alterarMedida(Medida medida) async {
     const sql =
-        'UPDATE exercicio SET altura=?, pesoKg=?, cintura=?, braco=?, quadril=?, perna=?, data_avaliacao=?, imc=? WHERE id = ?';
+        'UPDATE medida SET altura=?, pesoKg=?, cintura=?, braco=?, quadril=?, perna=?, data_avaliacao=?, imc=? WHERE id = ?';
     Database db = await Conexao.getConexao();
     var linhasAfetadas = await db.rawUpdate(sql, [
       medida.altura,
@@ -82,27 +82,30 @@ class MedidaDAO {
     } finally {}
   }
 
-  Future<List<Medida>> listarMedidas() async {
+  Future<List<Map<String, Object?>>> listarMedidas() async {
     late Database db;
     try {
-      const sql = 'SELECT * FROM exercicio';
+      const sql = 'SELECT * FROM medida';
       db = await Conexao.getConexao();
       List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
       if (resultados.isEmpty) throw Exception('Sem registros');
-      List<Medida> medidas = resultados.map((resultado) {
-        return Medida(
-            id: resultado['id'] as int,
-            altura: resultado['altura'] as double,
-            peso: resultado['peso'] as double,
-            cintura: resultado['cintura'] as double,
-            braco: resultado['barco'] as double,
-            quadril: resultado['quadril'] as double,
-            perna: resultado['perna'] as double,
-            dataAvaliacao: resultado['data_avaliacao'].toString(),
-            imc: resultado['imc'] as double,
-            aluno: resultado['aluno_id'] as Aluno);
-      }).toList();
-      return medidas;
+
+      return resultados;
+    } catch (e) {
+      throw Exception('classe ExercicioDAOSQLite, método listar');
+    } finally {}
+  }
+
+  Future<List<Map<String, Object?>>> listarMedidasAluno(int idAluno) async {
+    late Database db;
+    try {
+      const sql = 'SELECT * FROM exercicio WHERE aluno_id=?';
+      db = await Conexao.getConexao();
+      List<Map<String, Object?>> resultados =
+          (await db.rawQuery(sql, [idAluno]));
+      if (resultados.isEmpty) throw Exception('Sem registros');
+
+      return resultados;
     } catch (e) {
       throw Exception('classe ExercicioDAOSQLite, método listar');
     } finally {}

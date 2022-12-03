@@ -3,11 +3,11 @@ import 'package:starting_training/app/domain/entities/pessoaPersonal_trainer.dar
 
 class Aluno extends Pessoa {
   final int frequencia;
-  late PersonalTreiner personal;
+  PersonalTreiner? personal;
 
   Aluno({
     id,
-    required this.personal,
+    this.personal,
     required nome,
     required cpf,
     required telefone,

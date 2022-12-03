@@ -39,7 +39,7 @@ class _ListaExercicioAlunoState extends State<ListaExercicioAluno> {
       ),
       body: FutureBuilder(
         future: exercicioDAO.listarExerxixiosPorTreino(treino.id),
-        builder: (context, AsyncSnapshot<List<Exercicio>> dados) {
+        builder: (context, AsyncSnapshot<List<Map<String, Object?>>> dados) {
           if (!dados.hasData) {
             return const CircularProgressIndicator();
           }
@@ -54,19 +54,20 @@ class _ListaExercicioAlunoState extends State<ListaExercicioAluno> {
                 child: Card(
                   elevation: 4,
                   margin: const EdgeInsets.all(8),
-                  child: Column(
+                  child: ListView(
                     children: [
                       ListTile(
                         title: Text(
-                          exercicio.nome,
+                          exercicio['nome'].toString(),
                           style: const TextStyle(fontSize: 30),
                         ),
                       ),
                       Column(
                         children: [
-                          Text('Peso: ${exercicio.peso} Kg'),
-                          Text('Série: ${exercicio.serie} X'),
-                          Text('Repetições: ${exercicio.repeticao}'),
+                          Text('Peso: ${exercicio['pseo'].toString()} Kg'),
+                          Text('Série: ${exercicio['serie'].toString()} X'),
+                          Text(
+                              'Repetições: ${exercicio['repeticao'].toString()}'),
                         ],
                       )
                     ],

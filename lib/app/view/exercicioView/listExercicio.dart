@@ -39,7 +39,7 @@ class _ListaExercicioState extends State<ListaExercicio> {
       ),
       body: FutureBuilder(
         future: exercicioDAO.listarExerxixiosPorTreino(treino.id),
-        builder: (context, AsyncSnapshot<List<Exercicio>> dados) {
+        builder: (context, AsyncSnapshot<List<Map<String, Object?>>> dados) {
           if (!dados.hasData) {
             return const CircularProgressIndicator();
           }
@@ -58,11 +58,11 @@ class _ListaExercicioState extends State<ListaExercicio> {
                     children: [
                       ListTile(
                         title: Text(
-                          exercicio.nome,
+                          exercicio['nome'].toString(),
                           style: const TextStyle(fontSize: 30),
                         ),
                         subtitle: Text(
-                            '''Peso: ${exercicio.peso} Kg\nSérie: ${exercicio.serie}\nRepetições: ${exercicio.repeticao}
+                            '''Peso: ${exercicio['peso'].toString()} Kg\nSérie: ${exercicio['serie'].toString()}\nRepetições: ${exercicio['repeticao'].toString()}
                     '''),
                         trailing: SizedBox(
                           width: 100,
@@ -82,7 +82,7 @@ class _ListaExercicioState extends State<ListaExercicio> {
                               ),
                               IconButton(
                                 onPressed: () => exercicioDAO
-                                    .excluirExercicio(exercicio.id as int)
+                                    .excluirExercicio(exercicio['id'] as int)
                                     .then(
                                   (value) {
                                     setState(() {});

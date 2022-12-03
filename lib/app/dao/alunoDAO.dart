@@ -20,7 +20,7 @@ class AlunoDAO {
       aluno.senha,
       aluno.permissao,
       aluno.frequencia,
-      aluno.personal.id
+      aluno.personal!.id
     ]);
     print(linhasAfetadas > 0);
     return linhasAfetadas > 0;
@@ -83,28 +83,28 @@ class AlunoDAO {
   }
 
   @override
-  Future<List<Map<String, Object?>>> listarAluno() async {
+  Future<List<Aluno>> listarAluno() async {
     late Database db;
     try {
       const sql = 'SELECT * FROM aluno';
       db = await Conexao.getConexao();
       List<Map<String, Object?>> resultados = (await db.rawQuery(sql));
       if (resultados.isEmpty) throw Exception('Sem registros');
-      /*List<Aluno> alunos = resultados.map((resultado) {
+      List<Aluno> alunos = resultados.map((resultado) {
         return Aluno(
-            id: resultado['id'] as int,
-            nome: resultado['nome'].toString(),
-            cpf: resultado['cpf'].toString(),
-            telefone: resultado['telefone'].toString(),
-            dataNascimento: resultado['dataNascimento'].toString(),
-            endereco: resultado['endereco'].toString(),
-            status: resultado['status'].toString(),
-            frequencia: resultado['frequencia'] as int,
-            permissao: resultado['permissao'].toString(),
-            senha: resultado['senha'].toString(),
-            personal: resultado['personal_id'] as PersonalTreiner);
-      }).toList();*/
-      return resultados;
+          id: resultado['id'] as int,
+          nome: resultado['nome'].toString(),
+          cpf: resultado['cpf'].toString(),
+          telefone: resultado['telefone'].toString(),
+          dataNascimento: resultado['dataNascimento'].toString(),
+          endereco: resultado['endereco'].toString(),
+          status: resultado['status'].toString(),
+          frequencia: resultado['frequencia'] as int,
+          permissao: resultado['permissao'].toString(),
+          senha: resultado['senha'].toString(),
+        );
+      }).toList();
+      return alunos;
     } catch (e) {
       throw Exception(e);
     } finally {}
